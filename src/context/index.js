@@ -2,7 +2,6 @@ import React from "react";
 import { useState, createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-require("dotenv").config();
 
 const UserContext = createContext();
 
