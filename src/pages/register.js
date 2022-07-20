@@ -9,7 +9,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { SyncOutlined } from "@ant-design/icons";
 
 const Register = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    answer: ""
+  });
   const [checkbox, setCheckbox] = useState(false);
   const [ok, setOk] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -37,6 +43,13 @@ const Register = () => {
         answer: user.answer
       });
       setOk(data.ok);
+      setUser({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        answer: ""
+      });
       setLoading(false);
     } catch (err) {
       toast.error(err.response.data.message, { theme: "colored" });
@@ -65,6 +78,7 @@ const Register = () => {
               name="username"
               placeholder="Enter your username"
               handleChange={handleChange}
+              value={user.username}
             />
             <Input
               title="Enter your e-mail address *"
@@ -72,6 +86,7 @@ const Register = () => {
               name="email"
               placeholder="Enter your e-mail"
               handleChange={handleChange}
+              value={user.email}
             />
             <Input
               title="Enter your password *"
@@ -79,6 +94,7 @@ const Register = () => {
               name="password"
               placeholder="Enter your password"
               handleChange={handleChange}
+              value={user.password}
             />
             <Input
               title="Confirm your password *"
@@ -86,6 +102,7 @@ const Register = () => {
               name="confirmPassword"
               placeholder="Confirm your password"
               handleChange={handleChange}
+              value={user.confirmPassword}
             />
             <div className="form-group p-2">
               <small>
@@ -113,6 +130,7 @@ const Register = () => {
               name="answer"
               placeholder="Write your answer here"
               handleChange={handleChange}
+              value={user.answer}
             />
             <div className="form-group p-2 d-flex justify-content-center">
               <input

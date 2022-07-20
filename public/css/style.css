@@ -19,3 +19,8 @@ code {
   transform: scale(1.5);
   margin-right: 12px;
 }
+
+.text-area {
+  resize: none;
+  overflow: hidden;
+}

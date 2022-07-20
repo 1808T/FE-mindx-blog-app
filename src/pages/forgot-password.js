@@ -9,12 +9,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { SyncOutlined } from "@ant-design/icons";
 
 const ForgotPassword = () => {
-  const [user, setUser] = useState({});
+  const [state] = useContext(UserContext);
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    email: "",
+    answer: "",
+    newPassword: "",
+    confirmNewPassword: ""
+  });
   const [question, setQuestion] = useState(null);
   const [ok, setOk] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [state] = useContext(UserContext);
-  const navigate = useNavigate();
 
   const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -39,14 +44,12 @@ const ForgotPassword = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      console.log();
       const { data } = await axios.put("/forgot-password", {
         email: user.email,
         answer: user.answer,
         newPassword: user.newPassword,
         confirmNewPassword: user.confirmNewPassword
       });
-      console.log(data);
       setOk(data.ok);
       setLoading(false);
     } catch (err) {

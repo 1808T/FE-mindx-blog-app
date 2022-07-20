@@ -10,7 +10,10 @@ import { SyncOutlined } from "@ant-design/icons";
 const Login = () => {
   const [state, setState] = useContext(UserContext);
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    user: "",
+    token: ""
+  });
   const [loading, setLoading] = useState(false);
 
   const handleChange = e => {

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = ({ title, type, name, placeholder, handleChange }) => {
+const Input = ({ title, type, name, placeholder, handleChange, value }) => {
   return (
     <div className="form-group p-2">
       <small>
@@ -12,6 +12,7 @@ const Input = ({ title, type, name, placeholder, handleChange }) => {
         placeholder={placeholder}
         name={name}
         onChange={handleChange}
+        value={value}
       />
     </div>
   );
