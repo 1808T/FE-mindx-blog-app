@@ -36,6 +36,7 @@ const Login = () => {
       // SAVE TOKEN IN LOCAL STORAGE
       window.localStorage.setItem("auth", JSON.stringify(data));
       navigate("/");
+      toast.success(data.message, { theme: "colored" });
     } catch (err) {
       toast.error(err.response.data.message, { theme: "colored" });
       setLoading(false);

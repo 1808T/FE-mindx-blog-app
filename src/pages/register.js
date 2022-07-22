@@ -74,7 +74,7 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <Input
               title="Enter your username *"
-              type="username"
+              type="text"
               name="username"
               placeholder="Enter your username"
               handleChange={handleChange}

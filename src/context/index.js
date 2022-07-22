@@ -29,7 +29,7 @@ const UserProvider = ({ children }) => {
     function (error) {
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       const res = error.response;
-      if (res.status === 401) {
+      if (res.status === 401 && res.config && !res.config.__isRetryRequest) {
         setState(null);
         window.localStorage.removeItem("auth");
         navigate("/login");
