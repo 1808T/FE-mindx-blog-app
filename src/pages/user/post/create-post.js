@@ -14,8 +14,8 @@ const CreatePost = () => {
   const [state] = useContext(UserContext);
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState({ text: "" });
   const [description, setDescription] = useState("");
+  const [content, setContent] = useState({ text: "" });
   const [image, setImage] = useState({
     url: "",
     public_id: ""
@@ -42,7 +42,8 @@ const CreatePost = () => {
       console.log(data);
       toast.success(data.message, { theme: "colored" });
       setTitle("");
-      setContent("");
+      setDescription("");
+      setContent({ text: "" });
     } catch (err) {
       toast.error(err.response.data.message, { theme: "colored" });
       setLoading(false);

@@ -9,7 +9,7 @@ import { Avatar } from "antd";
 import Input from "../../components/Input";
 
 const Profile = () => {
-  const [state] = useContext(UserContext);
+  const [state, setState] = useContext(UserContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [ok, setOk] = useState(false);
@@ -65,8 +65,15 @@ const Profile = () => {
         address: user.address,
         avatar: avatar.url
       });
-      console.log(data);
+      // UPDATE LOCAL STORAGE
+      const info = JSON.parse(localStorage.getItem("auth"));
+      info.user = data.user;
+      localStorage.setItem("auth", JSON.stringify(info));
+      // UPDATE CONTEXT
+      setState({ ...state, user: data.user });
+      toast.success(data.message, { theme: "colored" });
     } catch (err) {
+      console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
     }
   };
@@ -88,7 +95,7 @@ const Profile = () => {
   return !ok ? (
     <SyncOutlined
       spin
-      className="d-flex justify-content-center align-items-center display-1 text-primary p-5"
+      className="d-flex justify-content-center align-items-center display-2 text-primary p-5"
     />
   ) : (
     <>
@@ -97,7 +104,6 @@ const Profile = () => {
           <div className="row py-5 bg-secondary text-light">
             <div className="col text-center">
               <h1>Your Profile</h1>
-              {JSON.stringify(state)}
             </div>
           </div>
         </div>

@@ -2,18 +2,28 @@ import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context";
-import { Avatar } from "antd";
+import { Avatar, Image } from "antd";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
   const [state, setState] = useContext(UserContext);
   const [current, setCurrent] = useState("");
+  const [avatar, setAvatar] = useState("");
   const navigate = useNavigate();
   const pathName = window.location.pathname;
 
   useEffect(() => {
     setCurrent(pathName);
   }, [pathName]);
+
+  useEffect(() => {
+    if (state && state.user.avatar) handleAvatar();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state && state.user.avatar]);
+
+  const handleAvatar = () => {
+    setAvatar(state && state.user.avatar);
+  };
 
   const logout = () => {
     window.localStorage.removeItem("auth");
@@ -64,13 +74,17 @@ const Nav = () => {
               onClick={() => {
                 navigate("/user/profile");
               }}>
-              <Avatar
-                style={{
-                  color: "#f56a00",
-                  backgroundColor: "#fde3cf"
-                }}>
-                {state && state.user.username && state.user.username[0]}
-              </Avatar>
+              {(state && !state.user.avatar) || (state && state.user.avatar === "") ? (
+                <Avatar
+                  style={{
+                    color: "#f56a00",
+                    backgroundColor: "#fde3cf"
+                  }}>
+                  {state && state.user.username && state.user.username[0].toUpperCase()}
+                </Avatar>
+              ) : (
+                <Avatar src={avatar} />
+              )}
               <span className="ms-2">{state && state.user.username}</span>
             </button>
             <button

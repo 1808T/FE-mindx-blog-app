@@ -11,7 +11,7 @@ const Login = () => {
   const [state, setState] = useContext(UserContext);
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    user: "",
+    user: {},
     token: ""
   });
   const [loading, setLoading] = useState(false);
@@ -28,6 +28,7 @@ const Login = () => {
         email: user.email,
         password: user.password
       });
+      console.log(data.user);
       // UPDATE GLOBAL CONTEXT
       setState({
         user: data.user,

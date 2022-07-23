@@ -30,7 +30,6 @@ const Home = () => {
   const handlePosts = async () => {
     try {
       const { data } = await axios.get(`/all-posts`);
-      console.log(data.posts);
       setPosts(data.posts);
     } catch (err) {
       console.log(err);
