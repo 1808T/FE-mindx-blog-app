@@ -28,7 +28,6 @@ const Login = () => {
         email: user.email,
         password: user.password
       });
-      console.log(data.user);
       // UPDATE GLOBAL CONTEXT
       setState({
         user: data.user,

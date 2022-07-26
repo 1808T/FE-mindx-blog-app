@@ -2,7 +2,7 @@ import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context";
-import { Avatar, Image } from "antd";
+import { Avatar } from "antd";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
@@ -68,24 +68,21 @@ const Nav = () => {
           </form>
 
           <div className="btn-group me-5">
-            <button
-              type="button"
-              className="btn btn-dark d-flex align-items-center"
-              onClick={() => {
-                navigate("/user/profile");
-              }}>
-              {(state && !state.user.avatar) || (state && state.user.avatar === "") ? (
-                <Avatar
-                  style={{
-                    color: "#f56a00",
-                    backgroundColor: "#fde3cf"
-                  }}>
-                  {state && state.user.username && state.user.username[0].toUpperCase()}
-                </Avatar>
-              ) : (
-                <Avatar src={avatar} />
-              )}
-              <span className="ms-2">{state && state.user.username}</span>
+            <button type="button" className="btn btn-dark d-flex align-items-center">
+              <Link to="/user/profile" style={{ color: "white" }}>
+                {(state && !state.user.avatar) || (state && state.user.avatar === "") ? (
+                  <Avatar
+                    style={{
+                      color: "#f56a00",
+                      backgroundColor: "#fde3cf"
+                    }}>
+                    {state && state.user.username && state.user.username[0].toUpperCase()}
+                  </Avatar>
+                ) : (
+                  <Avatar src={avatar} />
+                )}
+                <span className="ms-2">{state && state.user.username}</span>
+              </Link>
             </button>
             <button
               type="button"

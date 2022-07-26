@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SyncOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import axios from "axios";
-import Post from "../components/Post";
+import PostList from "../components/PostList";
 
 const Home = () => {
   const [state] = useContext(UserContext);
@@ -29,7 +29,7 @@ const Home = () => {
 
   const handlePosts = async () => {
     try {
-      const { data } = await axios.get(`/all-posts`);
+      const { data } = await axios.get("/all-posts");
       setPosts(data.posts);
     } catch (err) {
       console.log(err);
@@ -51,7 +51,7 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <Post allPosts={posts} />
+        <PostList allPosts={posts} />
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = ({ title, type, name, placeholder, handleChange, value }) => {
+const Input = ({ title, type, name, placeholder, handleChange, value, onFocus }) => {
   return (
     <div className="form-group p-2">
       <small>
@@ -13,6 +13,7 @@ const Input = ({ title, type, name, placeholder, handleChange, value }) => {
         name={name}
         onChange={handleChange}
         value={value}
+        onFocus={onFocus}
       />
     </div>
   );

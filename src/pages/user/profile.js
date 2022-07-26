@@ -3,15 +3,17 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context";
-import { SyncOutlined, LoadingOutlined, CameraTwoTone } from "@ant-design/icons";
+import { SyncOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
-import { Avatar } from "antd";
 import Input from "../../components/Input";
+import AvatarUpload from "../../components/AvatarUpload";
 
 const Profile = () => {
   const [state, setState] = useContext(UserContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [ok, setOk] = useState(false);
   const [user, setUser] = useState({
     username: "",
@@ -20,11 +22,11 @@ const Profile = () => {
     dob: "",
     address: ""
   });
-
   const [avatar, setAvatar] = useState({
     url: "",
     public_id: ""
   });
+  const [type, setType] = useState("text");
 
   useEffect(() => {
     if (state && state.token) getCurrentUser();
@@ -35,27 +37,51 @@ const Profile = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleAvatar = async e => {
+  const handleOnFocus = () => {
+    setType("date");
+  };
+
+  const uploadAvatar = async e => {
     const file = e.target.files[0];
     let formData = new FormData();
     formData.append("image", file);
     try {
-      setLoading(true);
-      const { data } = await axios.post("/upload-image", formData);
+      setUploading(true);
+      const { data } = await axios.post("current-user/avatar", formData);
       setAvatar({
         url: data.url,
         public_id: data.public_id
       });
-      setLoading(false);
+      setUploading(false);
+      setHidden(true);
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
-      setLoading(false);
+      setUploading(false);
+    }
+  };
+
+  const deleteAvatar = async e => {
+    const public_id = avatar.public_id;
+    try {
+      const { data } = await axios.delete("current-user/avatar", {
+        data: { public_id }
+      });
+      setAvatar({
+        url: "",
+        public_id: ""
+      });
+      toast.info(data.message, { theme: "colored" });
+      setHidden(false);
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message, { theme: "colored" });
     }
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.put("/current-user", {
         username: user.username,
@@ -72,18 +98,36 @@ const Profile = () => {
       // UPDATE CONTEXT
       setState({ ...state, user: data.user });
       toast.success(data.message, { theme: "colored" });
+      setLoading(false);
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
+      setLoading(false);
     }
   };
 
   const getCurrentUser = async () => {
     try {
       const { data } = await axios.get("/current-user");
+      console.log(data);
+      if (!data.user.about) {
+        setUser({
+          username: data.user.username
+        });
+      } else {
+        setUser({
+          username: data.user.username,
+          firstName: data.user.about.firstName,
+          lastName: data.user.about.lastName,
+          dob: data.user.about.dob,
+          address: data.user.about.address
+        });
+        setAvatar(data.user.avatar);
+      }
       data.ok ? setOk(true) : setOk(false);
     } catch (err) {
       navigate("/login");
+      console.log(err);
     }
   };
 
@@ -111,46 +155,14 @@ const Profile = () => {
         <div className="row py-5">
           <div className="col-md-6 offset-md-3">
             <form onSubmit={handleSubmit}>
-              <div className="form-group p-2 d-flex justify-content-center">
-                <div>
-                  <p className="text-muted" style={{ fontSize: "80%" }}>
-                    Your avatar
-                  </p>
-                  <label htmlFor="image-uploader">
-                    {avatar && avatar.url ? (
-                      <div>
-                        <div className="mb-3">
-                          <Avatar size={200} src={avatar.url} />
-                        </div>
-                        <label htmlFor="second-image-uploader">
-                          Select other image
-                          <CameraTwoTone className="btn btn-light btn-lg" />
-                        </label>
-                        <input
-                          type="file"
-                          id="second-image-uploader"
-                          accept="image/*"
-                          onChange={handleAvatar}
-                          hidden
-                          disabled
-                        />
-                      </div>
-                    ) : loading ? (
-                      <LoadingOutlined className="mt-2" />
-                    ) : (
-                      <CameraTwoTone className="btn btn-light btn-lg" />
-                    )}
-                  </label>
-                  <input
-                    type="file"
-                    id="image-uploader"
-                    accept="image/*"
-                    hidden
-                    onChange={handleAvatar}
-                    disabled={avatar && avatar.url}
-                  />
-                </div>
-              </div>
+              <AvatarUpload
+                title="Your Avatar"
+                hidden={hidden}
+                avatar={avatar}
+                uploadAvatar={uploadAvatar}
+                uploading={uploading}
+                deleteAvatar={deleteAvatar}
+              />
               <Input
                 title="Enter new username"
                 type="text"
@@ -177,9 +189,10 @@ const Profile = () => {
               />
               <Input
                 title="Enter your date of birth"
-                type="date"
+                type={type}
                 name="dob"
-                placeholder="Enter your first name"
+                onFocus={handleOnFocus}
+                placeholder="Enter your date of birth"
                 handleChange={handleChange}
                 value={user.dob}
               />

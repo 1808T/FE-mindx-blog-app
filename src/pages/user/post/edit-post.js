@@ -1,7 +1,7 @@
 import React from "react";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../../context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Input from "../../../components/Input";
 import { SyncOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
@@ -10,9 +10,10 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 
-const CreatePost = () => {
+const EditPost = () => {
   const [state] = useContext(UserContext);
   const navigate = useNavigate();
+  const { post_id } = useParams();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [content, setContent] = useState({ text: "" });
@@ -22,6 +23,26 @@ const CreatePost = () => {
   });
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    getUserPost();
+  }, []);
+
+  const getUserPost = async () => {
+    try {
+      const { data } = await axios.get(`/user/your-posts/${post_id}`);
+      setTitle(data.post.title);
+      setDescription(data.post.description);
+      setContent(data.post.content);
+      setImage({
+        url: data.post.image.url,
+        public_id: data.post.image.public_id
+      });
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message, { theme: "colored" });
+    }
+  };
 
   const handleTitleChange = e => {
     setTitle(e.target.value);
@@ -35,22 +56,16 @@ const CreatePost = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post("/new-post", {
+      const { data } = await axios.put(`/user/edit/${post_id}`, {
         title,
         description,
         content,
         image
       });
       toast.success(data.message, { theme: "colored" });
-      setTitle("");
-      setDescription("");
-      setContent({ text: "" });
-      setImage({
-        url: "",
-        public_id: ""
-      });
       setLoading(false);
     } catch (err) {
+      console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
       setLoading(false);
     }
@@ -76,20 +91,23 @@ const CreatePost = () => {
     }
   };
 
-  const deleteImage = async e => {
-    const public_id = image.public_id;
+  const replaceImage = async e => {
+    const file = e.target.files[0];
+    let formData = new FormData();
+    formData.append("image", file);
     try {
-      const { data } = await axios.delete("/image", {
-        data: { public_id }
-      });
+      setUploading(true);
+      const { data } = await axios.post("/image", formData);
       setImage({
-        url: "",
-        public_id: ""
+        url: data.url,
+        public_id: data.public_id
       });
-      toast.info(data.message, { theme: "colored" });
+      setUploading(false);
+      toast.success(data.message, { theme: "colored" });
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
+      setUploading(false);
     }
   };
 
@@ -100,7 +118,7 @@ const CreatePost = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col">
-            <h1 className="display-4 text-center">Create Post</h1>
+            <h1 className="display-4 text-center">Edit Post</h1>
           </div>
         </div>
         <div className="row py-5">
@@ -134,15 +152,15 @@ const CreatePost = () => {
                 />
               </div>
               <ImageUpload
-                title="Upload your post image"
+                title="Change your post image"
                 uploadImage={uploadImage}
                 uploading={uploading}
                 image={image}
-                deleteImage={deleteImage}
+                replaceImage={replaceImage}
               />
               <div className="form-group p-2 d-flex justify-content-center">
                 <button className="btn btn-dark" disabled={!title || !content}>
-                  {loading ? <SyncOutlined spin className="py-1" /> : "Submit"}
+                  {loading ? <SyncOutlined spin className="py-1" /> : "Update"}
                 </button>
               </div>
             </form>
@@ -153,4 +171,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default EditPost;

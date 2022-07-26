@@ -3,13 +3,13 @@ import React, { useEffect } from "react";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SyncOutlined } from "@ant-design/icons";
+import UserPostList from "../../../components/UserPostList";
 import axios from "axios";
-import Post from "../../../components/Post";
 
-const UserPost = () => {
+const AllUserPost = () => {
   const [state] = useContext(UserContext);
   const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
   const [ok, setOk] = useState(false);
 
   useEffect(() => {
@@ -20,8 +20,7 @@ const UserPost = () => {
   const handlePosts = async () => {
     try {
       const { data } = await axios.get(`/user/your-posts`);
-      console.log(data.posts);
-      setPosts(data.posts);
+      setUserPosts(data.posts);
       data.ok ? setOk(true) : setOk(false);
     } catch (err) {
       console.log(err);
@@ -45,18 +44,14 @@ const UserPost = () => {
         <div className="row">
           <div className="col">
             <h1 className="display-1 text-center py-5">Your Posts</h1>
-            <div className="form-group p-2 d-flex justify-content-evenly">
-              <button className="btn btn-dark">Edit</button>
-              <button className="btn btn-dark">Delete</button>
-            </div>
           </div>
         </div>
       </div>
       <div>
-        <Post allPosts={posts} />
+        <UserPostList userPosts={userPosts} />
       </div>
     </>
   );
 };
 
-export default UserPost;
+export default AllUserPost;
