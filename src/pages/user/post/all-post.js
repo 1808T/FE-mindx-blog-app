@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SyncOutlined } from "@ant-design/icons";
 import UserPostList from "../../../components/UserPostList";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AllUserPost = () => {
   const [state] = useContext(UserContext);
@@ -15,7 +16,7 @@ const AllUserPost = () => {
   useEffect(() => {
     if (state && state.token) handlePosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state && state.token]);
+  }, [state && state.token, userPosts]);
 
   const handlePosts = async () => {
     try {
@@ -25,6 +26,16 @@ const AllUserPost = () => {
     } catch (err) {
       console.log(err);
       navigate("/login");
+    }
+  };
+
+  const deletePost = async post_id => {
+    try {
+      const { data } = await axios.delete(`/user/delete/${post_id}`);
+      toast.success(data.message, { theme: "colored" });
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message, { theme: "colored" });
     }
   };
 
@@ -40,6 +51,7 @@ const AllUserPost = () => {
     />
   ) : (
     <>
+      <pre>{JSON.stringify(userPosts, null, 4)}</pre>
       <div className="container-fluid">
         <div className="row">
           <div className="col">
@@ -48,7 +60,7 @@ const AllUserPost = () => {
         </div>
       </div>
       <div>
-        <UserPostList userPosts={userPosts} />
+        <UserPostList userPosts={userPosts} deletePost={deletePost} />
       </div>
     </>
   );

@@ -76,20 +76,53 @@ const CreatePost = () => {
     }
   };
 
-  const deleteImage = async e => {
+  const clear = async e => {
     const public_id = image.public_id;
+    if (!public_id) {
+      setTitle("");
+      setDescription("");
+      setContent({ text: "" });
+      toast.info("Clear!!!", { theme: "colored" });
+    } else {
+      try {
+        const { data } = await axios.delete("/image", {
+          data: { public_id }
+        });
+        setTitle("");
+        setDescription("");
+        setContent({ text: "" });
+        setImage({
+          url: "",
+          public_id: ""
+        });
+        toast.info(data.message, { theme: "colored" });
+      } catch (err) {
+        console.log(err);
+        toast.error(err.response.data.message, { theme: "colored" });
+      }
+    }
+  };
+
+  const replaceImage = async e => {
+    const public_id = image.public_id;
+    const file = e.target.files[0];
+    let formData = new FormData();
+    formData.append("image", file);
+    formData.append("public_id", public_id);
     try {
-      const { data } = await axios.delete("/image", {
-        data: { public_id }
-      });
+      setUploading(true);
+      const { data } = await axios.put("/image", formData);
+      console.log(data);
       setImage({
-        url: "",
-        public_id: ""
+        url: data.url,
+        public_id: data.public_id
       });
       toast.info(data.message, { theme: "colored" });
+      setUploading(false);
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
+      setUploading(false);
     }
   };
 
@@ -138,9 +171,17 @@ const CreatePost = () => {
                 uploadImage={uploadImage}
                 uploading={uploading}
                 image={image}
-                deleteImage={deleteImage}
+                replaceImage={replaceImage}
               />
-              <div className="form-group p-2 d-flex justify-content-center">
+              <div className="form-group p-2 d-flex justify-content-between">
+                <button
+                  className="btn btn-dark"
+                  type="button"
+                  onClick={clear}
+                  // disabled={!(image && image.url)}
+                >
+                  {loading ? <SyncOutlined spin className="py-1" /> : "Clear"}
+                </button>
                 <button className="btn btn-dark" disabled={!title || !content}>
                   {loading ? <SyncOutlined spin className="py-1" /> : "Submit"}
                 </button>

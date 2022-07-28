@@ -61,21 +61,24 @@ const Profile = () => {
     }
   };
 
-  const deleteAvatar = async e => {
+  const replaceAvatar = async e => {
     const public_id = avatar.public_id;
+    const file = e.target.files[0];
+    let formData = new FormData();
+    formData.append("image", file);
+    formData.append("public_id", public_id);
     try {
-      const { data } = await axios.delete("current-user/avatar", {
-        data: { public_id }
-      });
+      setUploading(true);
+      const { data } = await axios.put("current-user/avatar", formData);
       setAvatar({
-        url: "",
-        public_id: ""
+        url: data.url,
+        public_id: data.public_id
       });
-      toast.info(data.message, { theme: "colored" });
-      setHidden(false);
+      setUploading(false);
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
+      setUploading(false);
     }
   };
 
@@ -89,7 +92,7 @@ const Profile = () => {
         lastName: user.lastName,
         dob: user.dob,
         address: user.address,
-        avatar: avatar.url
+        avatar: avatar
       });
       // UPDATE LOCAL STORAGE
       const info = JSON.parse(localStorage.getItem("auth"));
@@ -159,9 +162,9 @@ const Profile = () => {
                 title="Your Avatar"
                 hidden={hidden}
                 avatar={avatar}
-                uploadAvatar={uploadAvatar}
                 uploading={uploading}
-                deleteAvatar={deleteAvatar}
+                uploadAvatar={uploadAvatar}
+                replaceAvatar={replaceAvatar}
               />
               <Input
                 title="Enter new username"

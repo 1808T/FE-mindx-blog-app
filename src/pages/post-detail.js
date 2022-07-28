@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Image } from "antd";
-import parse from "html-react-parser";
-import moment from "moment";
 import Post from "../components/Post";
 import axios from "axios";
 
 const PostDetail = () => {
   const { post_id } = useParams();
-  const [postDetail, setPostDetail] = useState({ someProps: "", postedBy: {} });
+  const [postDetail, setPostDetail] = useState({
+    postedBy: {
+      avatar: {}
+    }
+  });
 
   useEffect(() => {
     handlePostById();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handlePostById = async () => {

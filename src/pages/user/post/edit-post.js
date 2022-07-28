@@ -23,9 +23,11 @@ const EditPost = () => {
   });
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  let path = window.location.pathname;
 
   useEffect(() => {
     getUserPost();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getUserPost = async () => {
@@ -92,18 +94,21 @@ const EditPost = () => {
   };
 
   const replaceImage = async e => {
+    const public_id = image.public_id;
     const file = e.target.files[0];
     let formData = new FormData();
     formData.append("image", file);
+    formData.append("public_id", public_id);
     try {
       setUploading(true);
-      const { data } = await axios.post("/image", formData);
+      const { data } = await axios.put("/image", formData);
+      console.log(data);
       setImage({
         url: data.url,
         public_id: data.public_id
       });
+      toast.info(data.message, { theme: "colored" });
       setUploading(false);
-      toast.success(data.message, { theme: "colored" });
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
@@ -157,6 +162,7 @@ const EditPost = () => {
                 uploading={uploading}
                 image={image}
                 replaceImage={replaceImage}
+                path={path}
               />
               <div className="form-group p-2 d-flex justify-content-center">
                 <button className="btn btn-dark" disabled={!title || !content}>

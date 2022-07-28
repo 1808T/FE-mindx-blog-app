@@ -1,19 +1,15 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "../context";
+import React from "react";
 import { Avatar } from "antd";
 import { CameraTwoTone, LoadingOutlined } from "@ant-design/icons";
 
-const AvatarUpload = ({ title, hidden, uploadAvatar, uploading, avatar, deleteAvatar }) => {
-  const [state] = useContext(UserContext);
-
+const AvatarUpload = ({ title, uploadAvatar, uploading, avatar, replaceAvatar }) => {
   return (
     <div className="form-group p-2 d-flex flex-column justify-content-center align-items-center">
       <div className="text-muted mb-2" style={{ fontSize: "80%" }}>
         {title}
       </div>
       <div className="d-flex flex-column align-items-center">
-        <Avatar size={250} src={state.user.avatar} className="mb-3" hidden={hidden} />
-        <label htmlFor="image-uploader">
+        <label htmlFor="avatar-uploader">
           {avatar && avatar.url ? (
             <Avatar size={250} src={avatar.url} />
           ) : uploading ? (
@@ -24,15 +20,28 @@ const AvatarUpload = ({ title, hidden, uploadAvatar, uploading, avatar, deleteAv
         </label>
         <input
           type="file"
-          id="image-uploader"
+          id="avatar-uploader"
           accept="image/*"
           onChange={uploadAvatar}
           hidden
           disabled={avatar && avatar.url}
         />
         {avatar && avatar.url ? (
-          <div className="btn btn-primary mt-2" onClick={deleteAvatar}>
-            Cancel
+          <div className="mt-3">
+            <label htmlFor="upload-other-avatar">
+              {uploading ? (
+                <LoadingOutlined className="mt-2" />
+              ) : (
+                <CameraTwoTone className="btn btn-light btn-lg" />
+              )}
+            </label>
+            <input
+              type="file"
+              id="upload-other-avatar"
+              accept="image/*"
+              onChange={replaceAvatar}
+              hidden
+            />
           </div>
         ) : (
           <></>

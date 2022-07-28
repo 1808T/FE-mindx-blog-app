@@ -4,7 +4,7 @@ const Input = ({ title, type, name, placeholder, handleChange, value, onFocus })
   return (
     <div className="form-group p-2">
       <small>
-        <label className="text-muted">{title}</label>
+        <label className="text-black">{title}</label>
       </small>
       <input
         className="form-control"

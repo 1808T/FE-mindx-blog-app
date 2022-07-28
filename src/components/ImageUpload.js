@@ -2,7 +2,7 @@ import React from "react";
 import { Image } from "antd";
 import { CameraTwoTone, LoadingOutlined } from "@ant-design/icons";
 
-const ImageUpload = ({ title, uploadImage, uploading, image, deleteImage }) => {
+const ImageUpload = ({ title, uploadImage, uploading, image, replaceImage }) => {
   return (
     <div className="form-group p-2 d-flex flex-column justify-content-center align-items-center">
       <div className="text-muted mb-2 align-self-start" style={{ fontSize: "80%" }}>
@@ -27,8 +27,21 @@ const ImageUpload = ({ title, uploadImage, uploading, image, deleteImage }) => {
           disabled={image && image.url}
         />
         {image && image.url ? (
-          <div className="btn btn-primary mt-2" onClick={deleteImage}>
-            Cancel
+          <div className="mt-3">
+            <label htmlFor="upload-other-image">
+              {uploading ? (
+                <LoadingOutlined className="mt-2" />
+              ) : (
+                <CameraTwoTone className="btn btn-light btn-lg" />
+              )}
+            </label>
+            <input
+              type="file"
+              id="upload-other-image"
+              accept="image/*"
+              onChange={replaceImage}
+              hidden
+            />
           </div>
         ) : (
           <></>

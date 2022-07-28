@@ -9,6 +9,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import ForgotPassword from "./pages/forgot-password";
 import Profile from "./pages/user/profile";
+import ChangePassword from "./pages/user/change-password";
 import AllUserPost from "./pages/user/post/all-post";
 import CreatePost from "./pages/user/post/create-post";
 import EditPost from "./pages/user/post/edit-post";
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="your-posts" element={<AllUserPost />} />
           <Route path="create-post" element={<CreatePost />} />
           <Route path="edit/:post_id" element={<EditPost />} />
+          <Route path="change-password" element={<ChangePassword />} />
         </Route>
       </Routes>
     </UserProvider>

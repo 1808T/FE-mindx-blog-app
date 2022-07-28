@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Image, Avatar } from "antd";
 import parse from "html-react-parser";
 import moment from "moment";
@@ -10,7 +10,7 @@ const Post = ({ postDetail }) => {
         <div className="card-header d-flex justify-content-between">
           <h5>Title: {postDetail.title}</h5>
           <h6>
-            avatar: <Avatar size={32} src={postDetail.postedBy.avatar} />
+            avatar: <Avatar size={32} src={postDetail.postedBy.avatar.url} />
             <br />
             author: {postDetail.postedBy.username}
             <br />

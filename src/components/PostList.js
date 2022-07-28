@@ -13,7 +13,7 @@ const PostList = ({ allPosts }) => {
             <div key={post._id} className="card mb-5">
               <div className="card-header d-flex justify-content-between">
                 <div>
-                  <Avatar size={32} src={post.postedBy.avatar} />
+                  <Avatar size={32} src={post.postedBy.avatar.url} />
                   <h5>author: {post.postedBy.username}</h5>
                 </div>
 

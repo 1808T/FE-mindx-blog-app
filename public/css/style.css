@@ -3,8 +3,18 @@ img {
   width: 100vw;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0 auto;
+  padding: 0;
+}
+
 body {
-  margin: 0;
+  margin: 0 auto;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -23,4 +33,35 @@ code {
 .text-area {
   resize: none;
   overflow: hidden;
+}
+
+.auth-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+  position: relative;
+  border-radius: 10px;
+  padding: 5px;
+  width: 50vw;
+  height: 100%;
+  background: url("/images/register-background.jpg"), no-repeat;
+  background-size: cover;
+}
+
+.register-container {
+  position: relative;
+}
+
+.register-container::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  height: 100vh;
+  background: url("/images/register-background.jpg"), repeat-y;
+  background-size: cover;
 }

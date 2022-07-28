@@ -2,9 +2,9 @@ import React from "react";
 import { Image, Avatar } from "antd";
 import parse from "html-react-parser";
 import moment from "moment";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const UserPostList = ({ userPosts }) => {
+const UserPostList = ({ userPosts, deletePost }) => {
   return (
     <div className="container">
       {userPosts &&
@@ -21,7 +21,14 @@ const UserPostList = ({ userPosts }) => {
                   </Link>
                 </li>
                 <li className="list-group-item">
-                  <button className="btn btn-dark">Delete</button>
+                  <button
+                    className="btn btn-dark"
+                    type="button"
+                    onClick={() => {
+                      deletePost(post._id);
+                    }}>
+                    Delete
+                  </button>
                 </li>
               </ul>
               <div className="card-header d-flex justify-content-between">
@@ -47,9 +54,6 @@ const UserPostList = ({ userPosts }) => {
               <div className="card-footer d-flex flex-column justify-content-center align-items-center">
                 <h5>Title: {post.title}</h5>
                 <h6>Description: {post.description}</h6>
-                <NavLink to={`post/${post._id}`}>
-                  <button className="btn btn-dark">Detail</button>
-                </NavLink>
               </div>
             </div>
           );
