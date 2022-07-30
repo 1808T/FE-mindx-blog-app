@@ -13,7 +13,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [ok, setOk] = useState(false);
   const [user, setUser] = useState({
     username: "",
@@ -53,7 +52,6 @@ const Profile = () => {
         public_id: data.public_id
       });
       setUploading(false);
-      setHidden(true);
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
@@ -92,8 +90,9 @@ const Profile = () => {
         lastName: user.lastName,
         dob: user.dob,
         address: user.address,
-        avatar: avatar
+        avatar
       });
+      console.log(data);
       // UPDATE LOCAL STORAGE
       const info = JSON.parse(localStorage.getItem("auth"));
       info.user = data.user;
@@ -112,11 +111,11 @@ const Profile = () => {
   const getCurrentUser = async () => {
     try {
       const { data } = await axios.get("/current-user");
-      console.log(data);
       if (!data.user.about) {
         setUser({
           username: data.user.username
         });
+        setAvatar(data.user.avatar);
       } else {
         setUser({
           username: data.user.username,
@@ -160,7 +159,7 @@ const Profile = () => {
             <form onSubmit={handleSubmit}>
               <AvatarUpload
                 title="Your Avatar"
-                hidden={hidden}
+                state={state}
                 avatar={avatar}
                 uploading={uploading}
                 uploadAvatar={uploadAvatar}

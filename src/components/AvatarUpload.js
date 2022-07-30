@@ -11,7 +11,7 @@ const AvatarUpload = ({ title, uploadAvatar, uploading, avatar, replaceAvatar })
       <div className="d-flex flex-column align-items-center">
         <label htmlFor="avatar-uploader">
           {avatar && avatar.url ? (
-            <Avatar size={250} src={avatar.url} />
+            <Avatar size={250} src={avatar && avatar.url} />
           ) : uploading ? (
             <LoadingOutlined className="mt-2" />
           ) : (
