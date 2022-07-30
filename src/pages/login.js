@@ -48,47 +48,48 @@ const Login = () => {
 
   return (
     <main>
-      <div className="container-fluid">
-        <div className="row py-5 bg-secondary text-light">
-          <div className="col text-center">
-            <h1>Login</h1>
-          </div>
-        </div>
-      </div>
-
-      <div className="row py-5">
-        <div className="col-md-6 offset-md-3">
-          <form onSubmit={handleSubmit}>
+      <div className="container-fluid login-container">
+        <div className="d-flex justify-content-center">
+          <form onSubmit={handleSubmit} className="auth-form">
+            <div className="form-group p-2 d-flex flex-column align-items-center">
+              <img alt="blog-logo" src="/images/logo.svg" className="blog-logo" />
+              <h2 className="mt-4">Login</h2>
+            </div>
             <Input
-              title="Enter your e-mail address"
+              title="E-mail address"
               type="email"
               name="email"
               placeholder="Enter your e-mail"
               handleChange={handleChange}
             />
             <Input
-              title="Enter your password"
+              title="Password"
               type="password"
               name="password"
               placeholder="Enter your password"
               handleChange={handleChange}
             />
             <div className="form-group p-2 d-flex justify-content-end">
-              <Link to="/forgot-password">Forgot your password?</Link>
+              <Link to="/forgot-password" className="text-muted">
+                Forgot your password?
+              </Link>
             </div>
             <div className="form-group p-2 d-flex justify-content-center">
               <button className="btn btn-dark" disabled={!user.email || !user.password}>
                 {loading ? <SyncOutlined spin className="py-1" /> : "Login"}
               </button>
             </div>
-          </form>
-          <div className="row">
-            <div className="col">
+            <div className="form-group p-2">
               <p className="text-center">
-                Don't have an account? <Link to="/register">Register</Link>
+                Don't have an account?
+                <Link to="/register">
+                  <button type="button" className="btn btn-outline-secondary text-black ms-2">
+                    Register
+                  </button>
+                </Link>
               </p>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </main>

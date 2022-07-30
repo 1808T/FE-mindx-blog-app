@@ -25,6 +25,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+.navbar,
+.dropdown-menu {
+  background: rgb(130, 148, 198);
+  background: radial-gradient(
+    circle,
+    rgba(130, 148, 198, 1) 0%,
+    rgba(151, 197, 195, 1) 50%,
+    rgba(175, 164, 198, 1) 100%
+  );
+}
+
+.nav-link,
+.profile-frame {
+  border: none !important;
+}
+
 .agree-checkbox {
   transform: scale(1.5);
   margin-right: 12px;
@@ -37,29 +53,42 @@ code {
 
 .auth-form {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-top: 3%;
   position: relative;
   border-radius: 10px;
-  padding: 5px;
-  width: 50vw;
-  height: 100%;
-  background: url("/images/register-background.jpg"), no-repeat;
+  padding: 5%;
+  /* width: 40vw;
+  height: 90vh; */
+  background: url("/images/register-background.jpg");
   background-size: cover;
 }
 
-.register-container {
+.blog-logo {
+  width: 5vw;
+  height: 100%;
+}
+
+@media (max-width: 1200px) {
+  .blog-logo {
+    display: none;
+  }
+}
+
+.register-container,
+.login-container {
   position: relative;
 }
 
-.register-container::before {
+.register-container::before,
+.login-container::before {
   content: " ";
   display: block;
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
   opacity: 0.9;
   height: 100vh;
   background: url("/images/register-background.jpg"), repeat-y;

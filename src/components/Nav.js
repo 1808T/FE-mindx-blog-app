@@ -35,7 +35,7 @@ const Nav = () => {
   return (
     <header className="text-bg-dark">
       <nav
-        className="navbar bg-dark d-flex justify-content-between mb-3 ps-3"
+        className="navbar d-flex justify-content-between ps-3"
         hidden={current === "/login" || current === "/register"}>
         <div className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
           <Link to="/">
@@ -43,17 +43,21 @@ const Nav = () => {
           </Link>
           <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li>
-              <Link to="/" className="nav-link px-2 text-white btn btn-dark ms-2 me-2">
+              <Link to="/" className="nav-link px-2 text-black btn btn-outline-secondary ms-2 me-2">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/faqs" className="nav-link px-2 text-white btn btn-dark ms-2 me-2">
+              <Link
+                to="/faqs"
+                className="nav-link px-2 text-black btn btn-outline-secondary ms-2 me-2">
                 FAQs
               </Link>
             </li>
             <li>
-              <Link to="/about" className="nav-link px-2 text-white btn btn-dark ms-2 me-2">
+              <Link
+                to="/about"
+                className="nav-link px-2 text-black btn btn-outline-secondary ms-2 me-2">
                 About
               </Link>
             </li>
@@ -61,24 +65,24 @@ const Nav = () => {
         </div>
         {state === null ? (
           <div className="d-flex p-2 me-2">
-            <Link to="/login" className="btn btn-outline-light me-2">
+            <Link to="/login" className="btn btn-outline-secondary me-2 text-black">
               Login
             </Link>
-            <Link to="/register" className="btn btn-outline-warning">
+            <Link to="/register" className="btn btn btn-secondary">
               Register
             </Link>
           </div>
         ) : (
           <div className="d-flex">
-            <form className="text-light d-flex me-2 p-2" role="search">
+            <form className="d-flex me-2 p-2" role="search">
               <input
-                className="form-control me-2"
+                className="form-control me-2 text-black"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
               <button
-                className="btn btn-outline-light"
+                className="btn btn-outline-secondary text-black"
                 type="submit"
                 onClick={e => e.preventDefault()}>
                 Search
@@ -86,8 +90,10 @@ const Nav = () => {
             </form>
 
             <div className="btn-group pe-2">
-              <button type="button" className="btn btn-dark d-flex align-items-center">
-                <Link to="/user/profile" style={{ color: "white" }}>
+              <button
+                type="button"
+                className="btn btn-outline-secondary d-flex align-items-center profile-frame">
+                <Link to="/user/profile" style={{ color: "black" }}>
                   {(state && !state.user.avatar) || (state && state.user.avatar === "") ? (
                     <Avatar
                       style={{
@@ -104,19 +110,20 @@ const Nav = () => {
               </button>
               <button
                 type="button"
-                className="btn btn-dark dropdown-toggle dropdown-toggle-split"
+                className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split profile-frame"
                 data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false"
+                style={{ color: "black" }}>
                 <span className="visually-hidden">Toggle Dropdown</span>
               </button>
               <ul className="dropdown-menu dropdown-menu-dark">
                 <li>
-                  <Link className="dropdown-item" to="/user/your-posts">
+                  <Link className="dropdown-item text-black" to="/user/your-posts">
                     Your posts
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/user/change-password">
+                  <Link className="dropdown-item text-black" to="/user/change-password">
                     Change Password
                   </Link>
                 </li>
@@ -124,7 +131,7 @@ const Nav = () => {
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/" onClick={logout}>
+                  <Link className="dropdown-item text-black" to="/" onClick={logout}>
                     Log Out
                   </Link>
                 </li>
@@ -132,7 +139,9 @@ const Nav = () => {
             </div>
 
             <div className="btn-group pe-2 ms-2">
-              <button className="btn btn-dark">Notification</button>
+              <button className="btn btn-outline-secondary text-black profile-frame">
+                Notification
+              </button>
             </div>
           </div>
         )}

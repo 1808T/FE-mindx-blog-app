@@ -16,7 +16,7 @@ const AllUserPost = () => {
   useEffect(() => {
     if (state && state.token) handlePosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state && state.token, userPosts]);
+  }, [state && state.token]);
 
   const handlePosts = async () => {
     try {
@@ -33,6 +33,7 @@ const AllUserPost = () => {
     try {
       const { data } = await axios.delete(`/user/delete/${post_id}`);
       toast.success(data.message, { theme: "colored" });
+      handlePosts();
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });

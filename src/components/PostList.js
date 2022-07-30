@@ -13,7 +13,17 @@ const PostList = ({ allPosts }) => {
             <div key={post._id} className="card mb-5">
               <div className="card-header d-flex justify-content-between">
                 <div>
-                  <Avatar size={32} src={post.postedBy.avatar.url} />
+                  {post && post.postedBy && !post.postedBy.avatar ? (
+                    <Avatar
+                      style={{
+                        color: "#f56a00",
+                        backgroundColor: "#fde3cf"
+                      }}>
+                      {post.postedBy.username[0].toUpperCase()}
+                    </Avatar>
+                  ) : (
+                    <Avatar size={32} src={post.postedBy.avatar.url} />
+                  )}
                   <h5>author: {post.postedBy.username}</h5>
                 </div>
 
