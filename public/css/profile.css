@@ -1,0 +1,16 @@
+.profile-container-fluid {
+  min-height: 60vh;
+  width: 100vw;
+  position: relative;
+}
+
+.profile-input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-input-group .form-group.mb-3 {
+  width: 50%;
+}

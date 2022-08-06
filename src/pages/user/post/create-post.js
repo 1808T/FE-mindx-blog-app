@@ -20,6 +20,7 @@ const CreatePost = () => {
     url: "",
     public_id: ""
   });
+  const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
 
@@ -31,6 +32,10 @@ const CreatePost = () => {
     setDescription(e.target.value);
   };
 
+  const handleCategoryChange = e => {
+    setCategory(e.target.value);
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
@@ -39,7 +44,8 @@ const CreatePost = () => {
         title,
         description,
         content,
-        image
+        image,
+        category
       });
       toast.success(data.message, { theme: "colored" });
       setTitle("");
@@ -49,6 +55,7 @@ const CreatePost = () => {
         url: "",
         public_id: ""
       });
+      setCategory("");
       setLoading(false);
     } catch (err) {
       toast.error(err.response.data.message, { theme: "colored" });
@@ -76,7 +83,7 @@ const CreatePost = () => {
     }
   };
 
-  const clear = async e => {
+  const clear = async () => {
     const public_id = image.public_id;
     if (!public_id) {
       setTitle("");
@@ -130,15 +137,35 @@ const CreatePost = () => {
 
   return (
     <>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col">
-            <h1 className="display-4 text-center">Create Post</h1>
-          </div>
-        </div>
+      <div className="container-fluid create-post-form">
         <div className="row py-5">
           <div className="col-md-6 offset-md-3">
+            <div className="d-flex align-items-center justify-content-center font-face-mulish">
+              <h1>New post</h1>
+            </div>
             <form className="form-group" onSubmit={handleSubmit}>
+              <div className="form-group mb-3">
+                <small>
+                  <label className="text-black">Topic *</label>
+                </small>
+                <select
+                  className="form-select form-select-sm"
+                  defaultValue="Select topic"
+                  name="question"
+                  onChange={handleCategoryChange}>
+                  <option disabled hidden>
+                    Select topic
+                  </option>
+                  <option>Art</option>
+                  <option>Book</option>
+                  <option>Food</option>
+                  <option>Game</option>
+                  <option>Health And Fitness</option>
+                  <option>Music</option>
+                  <option>Photography</option>
+                  <option>Technology</option>
+                </select>
+              </div>
               <Input
                 title="Title *"
                 type="text"
@@ -155,7 +182,7 @@ const CreatePost = () => {
                 value={description}
                 handleChange={handleDescriptionChange}
               />
-              <div className="form-group p-2">
+              <div className="form-group mb-3">
                 <small>
                   <label className="text-muted">Content *</label>
                 </small>
@@ -178,8 +205,7 @@ const CreatePost = () => {
                   className="btn btn-dark"
                   type="button"
                   onClick={clear}
-                  // disabled={!(image && image.url)}
-                >
+                  disabled={!(image && image.url)}>
                   {loading ? <SyncOutlined spin className="py-1" /> : "Clear"}
                 </button>
                 <button className="btn btn-dark" disabled={!title || !content}>

@@ -1,0 +1,28 @@
+.post-detail-container {
+  position: relative;
+  width: 70vw;
+}
+
+.post-detail-path {
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: #18a0fb;
+}
+
+.post-detail-title {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.post-detail-info {
+  font-size: 1.5rem;
+}
+
+.post-detail-content {
+  font-size: 1.125rem;
+  text-align: justify;
+}
+
+.rate {
+  font-size: 1.125rem;
+}

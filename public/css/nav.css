@@ -1,0 +1,33 @@
+.nav-container-fluid {
+  position: relative;
+  height: 10vh;
+  background: radial-gradient(circle, rgba(16, 95, 93, 1) 0%, rgba(25, 35, 76, 1) 100%);
+  z-index: 1;
+  margin-bottom: 50px;
+}
+
+.nav-intro {
+  width: 15vw;
+}
+
+.nav-intro span {
+  border: none !important;
+}
+
+.search-bar {
+  width: 20vw;
+}
+
+.nav-info {
+  width: 25vw;
+}
+
+.nav-link,
+.profile-frame {
+  border: none !important;
+}
+
+.notification-icon img {
+  width: 16px;
+  height: 16px;
+}

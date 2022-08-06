@@ -5,6 +5,9 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.min.css";
+import "./fonts/Mulish/Mulish-VariableFont_wght.ttf";
+import "./fonts/Montserrat/Montserrat-VariableFont_wght.ttf";
+import "./fonts/AbhayaLibre/AbhayaLibre-Regular.ttf";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

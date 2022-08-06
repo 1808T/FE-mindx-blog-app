@@ -5,7 +5,7 @@ import axios from "axios";
 import Input from "../components/Input";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { SyncOutlined } from "@ant-design/icons";
+import { SyncOutlined, FacebookFilled, GoogleSquareFilled, GithubFilled } from "@ant-design/icons";
 
 const Login = () => {
   const [state, setState] = useContext(UserContext);
@@ -47,13 +47,27 @@ const Login = () => {
   if (state && state.token) navigate("/");
 
   return (
-    <main>
-      <div className="container-fluid login-container">
-        <div className="d-flex justify-content-center">
-          <form onSubmit={handleSubmit} className="auth-form">
-            <div className="form-group p-2 d-flex flex-column align-items-center">
-              <img alt="blog-logo" src="/images/logo.svg" className="blog-logo" />
-              <h2 className="mt-4">Login</h2>
+    <main className="container-fluid d-flex justify-content-center login-container-fluid">
+      <div className="container login-container">
+        <div className="d-flex justify-content-center" id="login-container">
+          <div className="d-flex flex-column justify-content-center align-items-center login-frame">
+            <h1>Hello, friends!</h1>
+            <h6>Enter your personal details and start your journey with us</h6>
+            <Link to="/register" className="btn btn-outline-light">
+              Register
+            </Link>
+          </div>
+          <form
+            className="d-flex flex-column justify-content-center align-items-center login-form"
+            onSubmit={handleSubmit}>
+            <div className="mt-3 d-flex flex-column justify-content-center align-items-center">
+              <img src="/images/logo.svg" className="brand-logo mb-3" alt="logo" />
+              <h4>Login</h4>
+              <div className="d-flex justify-content-evenly">
+                <FacebookFilled className="btn btn-outline-light login-btn me-2" />
+                <GoogleSquareFilled className="btn btn-outline-light login-btn me-2" />
+                <GithubFilled className="btn btn-outline-light login-btn" />
+              </div>
             </div>
             <Input
               title="E-mail address"
@@ -69,25 +83,17 @@ const Login = () => {
               placeholder="Enter your password"
               handleChange={handleChange}
             />
-            <div className="form-group p-2 d-flex justify-content-end">
-              <Link to="/forgot-password" className="text-muted">
+            <div className="form-group mb-3">
+              <Link to="/forgot-password" className="align-self-end">
                 Forgot your password?
               </Link>
             </div>
-            <div className="form-group p-2 d-flex justify-content-center">
-              <button className="btn btn-dark" disabled={!user.email || !user.password}>
+            <div className="form-group mb-3 d-flex justify-content-center">
+              <button
+                className="btn btn-secondary text-white"
+                disabled={!user.email || !user.password}>
                 {loading ? <SyncOutlined spin className="py-1" /> : "Login"}
               </button>
-            </div>
-            <div className="form-group p-2">
-              <p className="text-center">
-                Don't have an account?
-                <Link to="/register">
-                  <button type="button" className="btn btn-outline-secondary text-black ms-2">
-                    Register
-                  </button>
-                </Link>
-              </p>
             </div>
           </form>
         </div>

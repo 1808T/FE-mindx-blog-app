@@ -1,0 +1,203 @@
+.container-fluid.d-flex.justify-content-center.login-container-fluid,
+.container-fluid.d-flex.justify-content-center.register-container-fluid,
+.container-fluid.d-flex.justify-content-center.forgot-password-container-fluid {
+  height: 100vh;
+  background: url("/images/background.jpg"), no-repeat;
+  background-size: cover;
+}
+
+.register-container,
+.login-container,
+.forgot-password-container {
+  position: absolute;
+  height: 95vh;
+  width: 80vw;
+  top: 5vh;
+}
+
+#register-container,
+#login-container,
+#forgot-password-container {
+  height: 90vh;
+}
+
+.register-form {
+  align-self: center;
+  height: 100%;
+  width: 100%;
+  background: #e8d1dc;
+  border-radius: 20px 0px 0px 20px;
+  opacity: 0.9;
+}
+
+.register-form h4,
+.login-form h4,
+.forgot-password-form h4 {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 3rem;
+  color: #19234c;
+}
+
+.register-btn,
+.login-btn {
+  border-radius: 5px;
+  border: 1px solid #19234c !important;
+}
+
+.register-form .form-group,
+.login-form .form-group {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-form small,
+.login-form small {
+  align-self: flex-start;
+}
+
+.register-form .form-control,
+.login-form .form-control {
+  width: 100%;
+}
+
+.register-frame {
+  width: 100%;
+  background: radial-gradient(113.94% 113.94% at 50.06% -13.94%, #19234c 17.04%, #10605d 100%);
+  border-radius: 0px 20px 20px 0px;
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 1200px) {
+  .d-flex.flex-column.justify-content-center.align-items-center.register-frame {
+    display: none !important;
+  }
+
+  .register-form {
+    border-radius: 20px 20px 20px 20px !important;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .register-form {
+    height: 90vh;
+  }
+
+  .form-group.mb-3 small {
+    display: none;
+  }
+}
+
+.register-frame h1,
+.login-frame h1,
+.forgot-password-frame h1 {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 4rem;
+  color: #ffffff;
+}
+
+.register-frame h6,
+.login-frame h6,
+.forgot-password-frame h6 {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.agree-checkbox {
+  transform: scale(1.5);
+}
+
+.login-form {
+  align-self: center;
+  height: 100%;
+  width: 100%;
+  background: #e8d1dc;
+  opacity: 0.9;
+  border-radius: 0px 20px 20px 0px;
+}
+
+.login-frame {
+  width: 100%;
+  background: radial-gradient(113.94% 113.94% at 50.06% -13.94%, #19234c 17.04%, #10605d 100%);
+  border-radius: 20px 0px 0px 20px;
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 1200px) {
+  .login-form {
+    border-radius: 20px 20px 20px 20px !important;
+  }
+
+  .d-flex.flex-column.justify-content-center.align-items-center.login-frame {
+    display: none !important;
+  }
+
+  .login-container {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+  }
+}
+
+.brand-logo {
+  width: 64px;
+  height: 64px;
+}
+
+@media screen and (max-height: 550px) {
+  .brand-logo {
+    display: none;
+  }
+
+  #login-container {
+    height: auto;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  #register-container {
+    height: auto;
+  }
+}
+
+.forgot-password-form {
+  align-self: center;
+  height: 100%;
+  width: 100%;
+  background: #e8d1dc;
+  opacity: 0.9;
+  border-radius: 0px 20px 20px 0px;
+}
+
+.forgot-password-form-container {
+  width: 25vw;
+}
+
+.forgot-password-frame {
+  width: 100%;
+  background: radial-gradient(113.94% 113.94% at 50.06% -13.94%, #19234c 17.04%, #10605d 100%);
+  border-radius: 20px 0px 0px 20px;
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 1200px) {
+  .d-flex.flex-column.justify-content-center.align-items-center.forgot-password-frame {
+    display: none !important;
+  }
+
+  .forgot-password-form {
+    border-radius: 20px 20px 20px 20px;
+  }
+
+  .forgot-password-form-container {
+    width: 50vw;
+  }
+}

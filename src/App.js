@@ -13,6 +13,8 @@ import ChangePassword from "./pages/user/change-password";
 import AllUserPost from "./pages/user/post/all-post";
 import CreatePost from "./pages/user/post/create-post";
 import EditPost from "./pages/user/post/edit-post";
+import Footer from "./components/Footer";
+import Error from "./pages/error";
 
 const App = () => {
   return (
@@ -32,7 +34,11 @@ const App = () => {
           <Route path="edit/:post_id" element={<EditPost />} />
           <Route path="change-password" element={<ChangePassword />} />
         </Route>
+        <Route path="faqs" />
+        <Route path="about" />
+        <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </UserProvider>
   );
 };

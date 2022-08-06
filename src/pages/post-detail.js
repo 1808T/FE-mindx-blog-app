@@ -10,9 +10,12 @@ const PostDetail = () => {
   const [state] = useContext(UserContext);
   const { post_id } = useParams();
   const [postDetail, setPostDetail] = useState({
+    content: "",
     postedBy: {
       avatar: {}
-    }
+    },
+    category: {},
+    image: {}
   });
   const [stage, setStage] = useState(null);
   const [likes, setLikes] = useState({
@@ -95,14 +98,6 @@ const PostDetail = () => {
 
   return (
     <>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col">
-            <h1 className="display-1 text-center py-5">Post Detail</h1>
-            <div className="form-group p-2 d-flex justify-content-center"></div>
-          </div>
-        </div>
-      </div>
       <Post
         userId={state && state.user._id}
         postDetail={postDetail}
@@ -112,11 +107,10 @@ const PostDetail = () => {
         dislikes={dislikes.count}
         likeData={likes.data}
         dislikeData={dislikes.data}
+        postId={post_id}
+        state={state}
       />
-      <div className="container">
-        <Comment postId={post_id} state={state} />
-      </div>
-      <div className="footer" style={{ height: "10vh" }}></div>
+      <Comment state={state} />
     </>
   );
 };

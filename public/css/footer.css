@@ -1,0 +1,8 @@
+.footer-container-fluid {
+  position: relative;
+  width: 100%;
+  height: 10vh;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(16, 95, 93, 1) 0%, rgba(25, 35, 76, 1) 100%);
+  margin-top: 25vh;
+}

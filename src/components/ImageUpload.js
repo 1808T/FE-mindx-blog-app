@@ -15,7 +15,9 @@ const ImageUpload = ({ title, uploadImage, uploading, image, replaceImage }) => 
           ) : uploading ? (
             <LoadingOutlined className="mt-2" />
           ) : (
-            <CameraTwoTone className="btn btn-light btn-lg" />
+            <div>
+              <CameraTwoTone className="btn btn-light btn-lg" />
+            </div>
           )}
         </label>
         <input
@@ -32,7 +34,10 @@ const ImageUpload = ({ title, uploadImage, uploading, image, replaceImage }) => 
               {uploading ? (
                 <LoadingOutlined className="mt-2" />
               ) : (
-                <CameraTwoTone className="btn btn-light btn-lg" />
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  <p>Choose other image</p>
+                  <CameraTwoTone className="btn btn-light btn-lg" />
+                </div>
               )}
             </label>
             <input

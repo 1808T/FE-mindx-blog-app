@@ -6,7 +6,7 @@ import Input from "../components/Input";
 import { toast } from "react-toastify";
 import { Modal } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { SyncOutlined } from "@ant-design/icons";
+import { SyncOutlined, FacebookFilled, GoogleSquareFilled, GithubFilled } from "@ant-design/icons";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -60,13 +60,21 @@ const Register = () => {
   if (state && state.token) navigate("/");
 
   return (
-    <main>
-      <div className="container-fluid register-container">
-        <div className="d-flex justify-content-center">
-          <form onSubmit={handleSubmit} className="auth-form">
-            <div className="form-group p-2 d-flex flex-column align-items-center">
-              <img alt="blog-logo" src="/images/logo.svg" className="blog-logo" />
-              <h2 className="mt-4">Register</h2>
+    <main className="container-fluid d-flex justify-content-center register-container-fluid">
+      <div className="container register-container">
+        <div className="d-flex justify-content-center" id="register-container">
+          <form
+            className="d-flex flex-column justify-content-center align-items-center register-form"
+            onSubmit={handleSubmit}>
+            <div className="mt-3 d-flex flex-column justify-content-center align-items-center">
+              <h4>Register</h4>
+              <div
+                className="d-flex justify-content-evenly register-icons mb-3"
+                style={{ width: "100%" }}>
+                <FacebookFilled className="btn btn-outline-secondary register-btn" />
+                <GoogleSquareFilled className="btn btn-outline-secondary register-btn" />
+                <GithubFilled className="btn btn-outline-secondary register-btn" />
+              </div>
             </div>
             <Input
               title="Enter your username *"
@@ -100,12 +108,12 @@ const Register = () => {
               handleChange={handleChange}
               value={user.confirmPassword}
             />
-            <div className="form-group p-2">
+            <div className="form-group mb-3">
               <small>
                 <label className="text-black">Pick a question</label>
               </small>
               <select
-                className="form-select"
+                className="form-select form-select-sm"
                 defaultValue="Choose an option ..."
                 name="question"
                 onChange={handleChange}>
@@ -117,9 +125,11 @@ const Register = () => {
                 <option>What city you were born?</option>
               </select>
             </div>
-            <small className="form-text text-black">
-              ⁉ You can use this to reset your password if forgotten.
-            </small>
+            <div className="form-group mb-3">
+              <small className="form-text text-black">
+                ⁉ You can use this to reset your password if forgotten.
+              </small>
+            </div>
             <Input
               title="Enter your answer *"
               type="text"
@@ -128,57 +138,49 @@ const Register = () => {
               handleChange={handleChange}
               value={user.answer}
             />
-            <div className="form-group p-2 d-flex justify-content-center">
+            <div
+              className="form-group mb-3 d-flex justify-content-center"
+              style={{ flexDirection: "row", justifyContent: "center" }}>
               <input
                 type="checkbox"
                 id="checkbox"
                 value="agree"
-                className="agree-checkbox form-check-input"
+                className="agree-checkbox"
                 onChange={handleCheckbox}
+                style={{ width: "5vh" }}
               />
-              <label htmlFor="checkbox">
-                By clicking checkbox, you agree to our Terms and Conditions and Privacy Policy
-              </label>
+              <small>
+                <label htmlFor="checkbox">
+                  By clicking checkbox, you agree to our Terms and Conditions and Privacy Policy
+                </label>
+              </small>
             </div>
-            <div className="form-group p-2 d-flex justify-content-center">
+            <div className="form-group mb-3 d-flex justify-content-center">
               <button className="btn btn-dark text-white" disabled={!checkbox}>
                 {loading ? <SyncOutlined spin className="py-1" /> : "Register"}
               </button>
             </div>
-            <div className="row">
-              <div className="col">
-                <p className="text-center">
-                  Already have an account? Go to
-                  <Link to="/login" className="ms-2">
-                    <button type="button" className="btn btn-outline-secondary text-black">
-                      Login
-                    </button>
-                  </Link>
-                </p>
-              </div>
-            </div>
           </form>
+          <div className="d-flex flex-column justify-content-center align-items-center register-frame">
+            <h1>Welcome Back!</h1>
+            <h6>To keep connected with us please login with your personal info</h6>
+            <Link to="/login" className="btn btn-outline-light">
+              Login
+            </Link>
+          </div>
         </div>
       </div>
       <div>
-        <div className="row">
-          <div className="col">
-            <Modal
-              title="Congratulation!!!"
-              visible={ok}
-              onCancel={() => setOk(false)}
-              footer={null}>
-              <div>
-                <p>Register successfully !!!</p>
-              </div>
-              <div className="d-flex justify-content-end">
-                <Link to="/login" className="btn btn-dark btn-sm">
-                  Go to Login
-                </Link>
-              </div>
-            </Modal>
+        <Modal title="Congratulation!!!" visible={ok} onCancel={() => setOk(false)} footer={null}>
+          <div>
+            <p>Register successfully !!!</p>
           </div>
-        </div>
+          <div className="d-flex justify-content-end">
+            <Link to="/login" className="btn btn-outline-dark btn-sm">
+              Go to Login
+            </Link>
+          </div>
+        </Modal>
       </div>
     </main>
   );

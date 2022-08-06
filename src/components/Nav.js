@@ -3,7 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context";
 import { Avatar } from "antd";
+import { BellFilled, SearchOutlined, EditOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 const Nav = () => {
   const [state, setState] = useContext(UserContext);
@@ -11,6 +13,7 @@ const Nav = () => {
   const navigate = useNavigate();
   const [current, setCurrent] = useState("");
   const pathName = window.location.pathname;
+  const [hidden, setHidden] = useState(true);
 
   useEffect(() => {
     if (state && state.user.avatar) handleAvatar();
@@ -26,127 +29,116 @@ const Nav = () => {
     setAvatar(state && state.user.avatar);
   };
 
+  const showSidebar = () => {
+    if (hidden === true) {
+      setHidden(false);
+    } else {
+      setHidden(true);
+    }
+  };
+
   const logout = () => {
     window.localStorage.removeItem("auth");
     setState(null);
+    setHidden(true);
     navigate("/login");
   };
 
   return (
     <header className="text-bg-dark">
       <nav
-        className="navbar d-flex justify-content-between ps-3"
-        hidden={current === "/login" || current === "/register"}>
-        <div className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        className="container-fluid d-flex justify-content-between align-items-center nav-container-fluid"
+        hidden={current === "/login" || current === "/register" || current === "/forgot-password"}>
+        <div className="nav-intro d-flex justify-content-evenly align-items-center font-face-mulish">
           <Link to="/">
-            <img src="/images/logo.svg" alt="blog-logo" style={{ width: 40, height: 40 }} />
+            <img src="/images/logo.svg" alt="blog-logo" style={{ width: 64, height: 64 }} />
           </Link>
-          <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li>
-              <Link to="/" className="nav-link px-2 text-black btn btn-outline-secondary ms-2 me-2">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/faqs"
-                className="nav-link px-2 text-black btn btn-outline-secondary ms-2 me-2">
-                FAQs
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about"
-                className="nav-link px-2 text-black btn btn-outline-secondary ms-2 me-2">
-                About
-              </Link>
-            </li>
-          </ul>
+          <Link to="/FAQs" className="btn btn-outline-secondary text-white nav-link">
+            FAQs
+          </Link>
+          <Link to="/About" className="btn btn-outline-secondary text-white nav-link">
+            About
+          </Link>
         </div>
+        <form className="d-flex me-2 search-bar" role="search">
+          <input
+            className="form-control me-2 text-black"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <SearchOutlined
+            className="btn btn-outline-secondary d-flex justify-content-center align-items-center text-white"
+            style={{ fontSize: "150%" }}
+          />
+        </form>
         {state === null ? (
-          <div className="d-flex p-2 me-2">
-            <Link to="/login" className="btn btn-outline-secondary me-2 text-black">
+          <div className="d-flex p-2 me-2 font-face-mulish">
+            <Link to="/login" className="btn btn-outline-secondary me-2 text-white">
               Login
             </Link>
-            <Link to="/register" className="btn btn btn-secondary">
+            <Link to="/register" className="btn btn-light" style={{ color: "#182A4E" }}>
               Register
             </Link>
           </div>
         ) : (
-          <div className="d-flex">
-            <form className="d-flex me-2 p-2" role="search">
-              <input
-                className="form-control me-2 text-black"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button
-                className="btn btn-outline-secondary text-black"
-                type="submit"
-                onClick={e => e.preventDefault()}>
-                Search
-              </button>
-            </form>
-
-            <div className="btn-group pe-2">
-              <button
-                type="button"
-                className="btn btn-outline-secondary d-flex align-items-center profile-frame">
-                <Link to="/user/profile" style={{ color: "black" }}>
-                  {(state && !state.user.avatar) || (state && state.user.avatar === "") ? (
-                    <Avatar
-                      style={{
-                        color: "#f56a00",
-                        backgroundColor: "#fde3cf"
-                      }}>
-                      {state && state.user.username && state.user.username[0].toUpperCase()}
-                    </Avatar>
-                  ) : (
-                    <Avatar src={avatar.url} />
-                  )}
-                  <span className="ms-2">{state && state.user.username}</span>
-                </Link>
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split profile-frame"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style={{ color: "black" }}>
-                <span className="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li>
-                  <Link className="dropdown-item text-black" to="/user/your-posts">
-                    Your posts
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item text-black" to="/user/change-password">
-                    Change Password
-                  </Link>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <Link className="dropdown-item text-black" to="/" onClick={logout}>
-                    Log Out
-                  </Link>
-                </li>
-              </ul>
+          <div className="d-flex nav-info justify-content-evenly align-items-center">
+            <Link
+              className="btn btn-outline-secondary d-flex justify-content-center align-items-center p-2"
+              to="/user/create-post">
+              <EditOutlined style={{ fontSize: "150%", color: "white" }} />
+            </Link>
+            <div className="btn btn-outline-secondary d-flex justify-content-center align-items-center p-2">
+              <BellFilled style={{ fontSize: "150%", color: "white" }} />
             </div>
-
-            <div className="btn-group pe-2 ms-2">
-              <button className="btn btn-outline-secondary text-black profile-frame">
-                Notification
-              </button>
+            <div className="user-info d-flex justify-content-evenly">
+              <div className="btn-group">
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary d-flex justify-content-center align-items-center profile-frame">
+                  <Link
+                    to="/user/profile"
+                    style={{ color: "black" }}
+                    className="d-flex align-items-center justify-content-center">
+                    {(state && !state.user.avatar) || (state && state.user.avatar === "") ? (
+                      <Avatar
+                        size={44}
+                        style={{
+                          color: "#f56a00",
+                          backgroundColor: "#fde3cf"
+                        }}>
+                        {state && state.user.username && state.user.username[0].toUpperCase()}
+                      </Avatar>
+                    ) : (
+                      <Avatar src={avatar.url} size={44} />
+                    )}
+                    {/* <span className="ms-2 font-face-mulish">{state && state.user.username}</span> */}
+                    <div className="d-flex flex-column justify-content-center align-items-start font-face-mulish ps-3">
+                      <div>{state && state.user.username}</div>
+                      <div>{state && state.user.email}</div>
+                    </div>
+                  </Link>
+                </button>
+              </div>
             </div>
+            <button
+              type="button"
+              className="btn btn-outline-secondary text-white"
+              onClick={showSidebar}>
+              ☰
+            </button>
           </div>
         )}
       </nav>
+      <Sidebar
+        state={state}
+        avatar={avatar}
+        logout={logout}
+        hidden={hidden}
+        showSidebar={showSidebar}
+      />
     </header>
   );
 };
+
 export default Nav;

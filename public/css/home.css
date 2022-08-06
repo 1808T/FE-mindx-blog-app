@@ -1,0 +1,15 @@
+.home-main {
+  position: relative;
+  min-height: 100%;
+}
+
+/* .home-title {
+  position: relative;
+  top: 15vh;
+} */
+
+.home-container {
+  display: grid;
+  grid-template: 600px 600px/ 1fr 1fr;
+  gap: 50px 100px;
+}

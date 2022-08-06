@@ -4,18 +4,23 @@ import { CameraTwoTone, LoadingOutlined } from "@ant-design/icons";
 
 const AvatarUpload = ({ title, uploadAvatar, uploading, avatar, replaceAvatar }) => {
   return (
-    <div className="form-group p-2 d-flex flex-column justify-content-center align-items-center">
-      <div className="text-muted mb-2" style={{ fontSize: "80%" }}>
-        {title}
-      </div>
+    <div className="form-group mb-3 d-flex flex-column justify-content-center align-items-center">
       <div className="d-flex flex-column align-items-center">
         <label htmlFor="avatar-uploader">
           {avatar && avatar.url ? (
-            <Avatar size={250} src={avatar && avatar.url} />
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <div className="text-muted mb-2" style={{ fontSize: "80%" }}>
+                {title}
+              </div>
+              <Avatar size={150} src={avatar && avatar.url} />
+            </div>
           ) : uploading ? (
             <LoadingOutlined className="mt-2" />
           ) : (
-            <CameraTwoTone className="btn btn-light btn-lg" />
+            <div className="d-flex flex-column align-items-center justify-content-center">
+              <p>Upload your avatar here</p>
+              <CameraTwoTone className="btn btn-light btn-lg" />
+            </div>
           )}
         </label>
         <input
@@ -32,7 +37,10 @@ const AvatarUpload = ({ title, uploadAvatar, uploading, avatar, replaceAvatar })
               {uploading ? (
                 <LoadingOutlined className="mt-2" />
               ) : (
-                <CameraTwoTone className="btn btn-light btn-lg" />
+                <div className="d-flex flex-column align-items-center justify-content-center">
+                  <p>Choose other avatar</p>
+                  <CameraTwoTone className="btn btn-light btn-lg" />
+                </div>
               )}
             </label>
             <input

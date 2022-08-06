@@ -1,0 +1,16 @@
+.comment-container {
+  position: relative;
+  width: 70vw;
+}
+
+.comment-user-info {
+  flex: 1;
+}
+
+.comment-content-container {
+  flex: 8;
+}
+
+.comment-content {
+  text-align: justify;
+}

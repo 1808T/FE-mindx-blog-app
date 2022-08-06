@@ -50,70 +50,62 @@ const ChangePassword = () => {
   };
 
   return (
-    <main>
-      <div className="container-fluid">
-        <div className="row py-5 bg-secondary text-light">
-          <div className="col text-center">
-            <h1>Change password</h1>
+    <main className="container-fluid change-password-container-fluid">
+      <div className="container">
+        <div className="d-flex justify-content-center align-items-center font-face-mulish">
+          <h1>Change password</h1>
+        </div>
+        <form onSubmit={changePassword}>
+          <Input
+            title="Enter your current password *"
+            type="password"
+            name="currentPassword"
+            placeholder="Enter your current password here"
+            handleChange={handleChange}
+          />
+          <Input
+            title="Enter your new password *"
+            type="password"
+            name="newPassword"
+            placeholder="Enter your password"
+            handleChange={handleChange}
+          />
+          <Input
+            title="Confirm your new password *"
+            type="password"
+            name="confirmNewPassword"
+            placeholder="Confirm your password"
+            handleChange={handleChange}
+          />
+          <div className="form-group mb-3 d-flex justify-content-center">
+            <button
+              className="btn btn-primary"
+              disabled={!user.newPassword || !user.confirmNewPassword || !user.currentPassword}>
+              {loading ? <SyncOutlined spin className="py-1" /> : "Change Password"}
+            </button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <div className="row">
+          <div className="col">
+            <Modal
+              title="Your password has been changed. Please login again."
+              visible={ok}
+              onCancel={() => setOk(false)}
+              footer={null}>
+              <div>
+                <p>You can now log in with your new password.</p>
+              </div>
+              <div className="d-flex justify-content-end">
+                <Link to="/login" className="btn btn-outline-dark btn-sm">
+                  Go to Login
+                </Link>
+              </div>
+            </Modal>
           </div>
         </div>
       </div>
-      <>
-        <div className="row py-5">
-          <div className="col-md-6 offset-md-3">
-            <form onSubmit={changePassword}>
-              <Input
-                title="Enter your current password *"
-                type="text"
-                name="currentPassword"
-                placeholder="Enter your current password here"
-                handleChange={handleChange}
-              />
-              <Input
-                title="Enter your new password *"
-                type="password"
-                name="newPassword"
-                placeholder="Enter your password"
-                handleChange={handleChange}
-              />
-              <Input
-                title="Confirm your new password *"
-                type="password"
-                name="confirmNewPassword"
-                placeholder="Confirm your password"
-                handleChange={handleChange}
-              />
-              <div className="form-group p-2 d-flex justify-content-center">
-                <button
-                  className="btn btn-dark"
-                  disabled={!user.newPassword || !user.confirmNewPassword || !user.currentPassword}>
-                  {loading ? <SyncOutlined spin className="py-1" /> : "Change Password"}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div>
-          <div className="row">
-            <div className="col">
-              <Modal
-                title="Your password has been changed. Please login again."
-                visible={ok}
-                onCancel={() => setOk(false)}
-                footer={null}>
-                <div>
-                  <p>You can now log in with your new password.</p>
-                </div>
-                <div className="d-flex justify-content-end">
-                  <Link to="/login" className="btn btn-dark btn-sm">
-                    Go to Login
-                  </Link>
-                </div>
-              </Modal>
-            </div>
-          </div>
-        </div>
-      </>
     </main>
   );
 };

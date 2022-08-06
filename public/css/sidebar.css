@@ -1,0 +1,25 @@
+.sidebar {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 15vw;
+  height: 100vh;
+  background: linear-gradient(90deg, rgba(25, 35, 76, 1) 0%, rgba(22, 53, 81, 1) 100%);
+  z-index: 1;
+}
+
+.sidebar-item {
+  width: 80%;
+  border: none !important;
+}
+
+.sidebar-btn {
+  border-radius: 20px !important;
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid white !important;
+}

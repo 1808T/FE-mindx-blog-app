@@ -16,10 +16,12 @@ const Profile = () => {
   const [ok, setOk] = useState(false);
   const [user, setUser] = useState({
     username: "",
+    gender: "",
     firstName: "",
     lastName: "",
     dob: "",
-    address: ""
+    address: "",
+    phone: ""
   });
   const [avatar, setAvatar] = useState({
     url: "",
@@ -59,6 +61,21 @@ const Profile = () => {
     }
   };
 
+  // const deleteAvatar = async () => {
+  //   const public_id = avatar.public_id;
+  //   try {
+  //     setUploading(true);
+  //     const { data } = await axios.delete("current-user/avatar", {
+  //       data: { public_id }
+  //     });
+  //     toast.success(data.message);
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error(err.response.data.message, { theme: "colored" });
+  //     setUploading(false);
+  //   }
+  // };
+
   const replaceAvatar = async e => {
     const public_id = avatar.public_id;
     const file = e.target.files[0];
@@ -86,10 +103,12 @@ const Profile = () => {
     try {
       const { data } = await axios.put("/current-user", {
         username: user.username,
+        gender: user.gender,
         firstName: user.firstName,
         lastName: user.lastName,
         dob: user.dob,
         address: user.address,
+        phone: user.phone,
         avatar
       });
       console.log(data);
@@ -119,10 +138,12 @@ const Profile = () => {
       } else {
         setUser({
           username: data.user.username,
+          gender: data.user.about.gender,
           firstName: data.user.about.firstName,
           lastName: data.user.about.lastName,
           dob: data.user.about.dob,
-          address: data.user.about.address
+          address: data.user.about.address,
+          phone: data.user.about.phone
         });
         setAvatar(data.user.avatar);
       }
@@ -145,52 +166,71 @@ const Profile = () => {
     />
   ) : (
     <>
-      <main>
-        <div className="container-fluid">
-          <div className="row py-5 bg-secondary text-light">
-            <div className="col text-center">
-              <h1>Your Profile</h1>
-            </div>
-          </div>
+      <main className="container-fluid profile-container-fluid">
+        <div className="container d-flex justify-content-center align-items-center font-face-mulish">
+          <h1>Edit Profile</h1>
         </div>
-
-        <div className="row py-5">
-          <div className="col-md-6 offset-md-3">
-            <form onSubmit={handleSubmit}>
-              <AvatarUpload
-                title="Your Avatar"
-                state={state}
-                avatar={avatar}
-                uploading={uploading}
-                uploadAvatar={uploadAvatar}
-                replaceAvatar={replaceAvatar}
-              />
+        <div className="container profile-container">
+          <form onSubmit={handleSubmit}>
+            <AvatarUpload
+              title="Your Avatar"
+              state={state}
+              avatar={avatar}
+              uploading={uploading}
+              uploadAvatar={uploadAvatar}
+              replaceAvatar={replaceAvatar}
+            />
+            <div className="profile-input-group">
+              <div className="form-group d-flex justify-content-between" style={{ width: "50%" }}>
+                <Input
+                  title="Username"
+                  type="text"
+                  name="username"
+                  placeholder="Enter new username"
+                  handleChange={handleChange}
+                  value={state.user.username}
+                  disabled={true}
+                />
+                <div style={{ width: "2vw" }}></div>
+                <div className="form-group mb-3">
+                  <small>
+                    <label className="text-black">Gender</label>
+                  </small>
+                  <select
+                    className="form-select form-select-sm"
+                    defaultValue={user.gender || "Gender"}
+                    name="gender"
+                    onChange={handleChange}>
+                    <option disabled hidden>
+                      Gender
+                    </option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+              <div className="form-group d-flex justify-content-between" style={{ width: "50%" }}>
+                <Input
+                  title="First name"
+                  type="text"
+                  name="firstName"
+                  placeholder="Enter your first name"
+                  handleChange={handleChange}
+                  value={user.firstName}
+                />
+                <div style={{ width: "2vw" }}></div>
+                <Input
+                  title="Last name"
+                  type="text"
+                  name="lastName"
+                  placeholder="Enter your last name"
+                  handleChange={handleChange}
+                  value={user.lastName}
+                />
+              </div>
               <Input
-                title="Enter new username"
-                type="text"
-                name="username"
-                placeholder="Enter new username"
-                handleChange={handleChange}
-                value={user.username}
-              />
-              <Input
-                title="Enter your first name"
-                type="text"
-                name="firstName"
-                placeholder="Enter your first name"
-                handleChange={handleChange}
-                value={user.firstName}
-              />
-              <Input
-                title="Enter your last name"
-                type="text"
-                name="lastName"
-                placeholder="Enter your last name"
-                handleChange={handleChange}
-                value={user.lastName}
-              />
-              <Input
-                title="Enter your date of birth"
+                title="Date of birth"
                 type={type}
                 name="dob"
                 onFocus={handleOnFocus}
@@ -199,20 +239,28 @@ const Profile = () => {
                 value={user.dob}
               />
               <Input
-                title="Enter your address"
+                title="Address"
                 type="text"
                 name="address"
                 placeholder="Enter your address"
                 handleChange={handleChange}
                 value={user.address}
               />
-              <div className="form-group p-2 d-flex justify-content-center">
-                <button className="btn btn-dark">
+              <Input
+                title="Phone"
+                type="text"
+                name="phone"
+                placeholder="Enter your phone"
+                handleChange={handleChange}
+                value={user.phone}
+              />
+              <div className="form-group mb-3 d-flex justify-content-center">
+                <button className="btn btn-outline-primary">
                   {loading ? <SyncOutlined spin className="py-1" /> : "Update"}
                 </button>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </main>
     </>

@@ -20,12 +20,12 @@ const AllUserPost = () => {
 
   const handlePosts = async () => {
     try {
-      const { data } = await axios.get(`/user/your-posts`);
+      const { data } = await axios.get(`/your-posts`);
       setUserPosts(data.posts);
       data.ok ? setOk(true) : setOk(false);
     } catch (err) {
       console.log(err);
-      navigate("/login");
+      toast.error(err.response.data.message, { theme: "colored" });
     }
   };
 
