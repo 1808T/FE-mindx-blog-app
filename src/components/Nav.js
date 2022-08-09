@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context";
 import { Avatar } from "antd";
-import { BellFilled, SearchOutlined, EditOutlined } from "@ant-design/icons";
+import { BellFilled, SearchOutlined, FormOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
@@ -51,7 +51,12 @@ const Nav = () => {
         hidden={current === "/login" || current === "/register" || current === "/forgot-password"}>
         <div className="nav-intro d-flex justify-content-evenly align-items-center font-face-mulish">
           <Link to="/">
-            <img src="/images/logo.svg" alt="blog-logo" style={{ width: 64, height: 64 }} />
+            <img
+              src="/images/logo.svg"
+              alt="blog-logo"
+              style={{ width: 64, height: 64 }}
+              className="p-2"
+            />
           </Link>
           <Link to="/FAQs" className="btn btn-outline-secondary text-white nav-link">
             FAQs
@@ -60,20 +65,20 @@ const Nav = () => {
             About
           </Link>
         </div>
-        <form className="d-flex me-2 search-bar" role="search">
-          <input
-            className="form-control me-2 text-black"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <SearchOutlined
-            className="btn btn-outline-secondary d-flex justify-content-center align-items-center text-white"
-            style={{ fontSize: "150%" }}
-          />
-        </form>
         {state === null ? (
           <div className="d-flex p-2 me-2 font-face-mulish">
+            <form className="d-flex me-2 search-bar" role="search">
+              <input
+                className="form-control me-2 text-black"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <SearchOutlined
+                className="btn btn-outline-secondary d-flex justify-content-center align-items-center text-white"
+                style={{ fontSize: "150%" }}
+              />
+            </form>
             <Link to="/login" className="btn btn-outline-secondary me-2 text-white">
               Login
             </Link>
@@ -83,12 +88,27 @@ const Nav = () => {
           </div>
         ) : (
           <div className="d-flex nav-info justify-content-evenly align-items-center">
+            <form className="d-flex me-2 search-bar" role="search">
+              <input
+                className="form-control me-2 text-black"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <SearchOutlined
+                className="btn btn-outline-secondary d-flex justify-content-center align-items-center text-white"
+                style={{ fontSize: "150%" }}
+              />
+            </form>
             <Link
-              className="btn btn-outline-secondary d-flex justify-content-center align-items-center p-2"
-              to="/user/create-post">
-              <EditOutlined style={{ fontSize: "150%", color: "white" }} />
+              className="btn btn-outline-secondary d-flex justify-content-center align-items-center p-2 create-post-btn"
+              to="/user/create-post"
+              style={{ border: "none" }}>
+              <FormOutlined style={{ fontSize: "150%", color: "white" }} />
             </Link>
-            <div className="btn btn-outline-secondary d-flex justify-content-center align-items-center p-2">
+            <div
+              className="btn btn-outline-secondary d-flex justify-content-center align-items-center p-2 notification"
+              style={{ border: "none" }}>
               <BellFilled style={{ fontSize: "150%", color: "white" }} />
             </div>
             <div className="user-info d-flex justify-content-evenly">
@@ -112,10 +132,9 @@ const Nav = () => {
                     ) : (
                       <Avatar src={avatar.url} size={44} />
                     )}
-                    {/* <span className="ms-2 font-face-mulish">{state && state.user.username}</span> */}
                     <div className="d-flex flex-column justify-content-center align-items-start font-face-mulish ps-3">
                       <div>{state && state.user.username}</div>
-                      <div>{state && state.user.email}</div>
+                      <div className="user-email">{state && state.user.email}</div>
                     </div>
                   </Link>
                 </button>

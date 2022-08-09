@@ -10,6 +10,7 @@ const PostDetail = () => {
   const [state] = useContext(UserContext);
   const { post_id } = useParams();
   const [postDetail, setPostDetail] = useState({
+    title: "",
     content: "",
     postedBy: {
       avatar: {}
@@ -26,6 +27,7 @@ const PostDetail = () => {
     data: [],
     count: 0
   });
+  const [postCategory, setPostCategory] = useState("");
 
   useEffect(() => {
     handlePostById();
@@ -38,8 +40,14 @@ const PostDetail = () => {
   }, [stage]);
 
   const handlePostById = async () => {
-    const { data } = await axios.get(`/post/${post_id}`);
-    setPostDetail(data.post);
+    try {
+      const { data } = await axios.get(`/post/${post_id}`);
+      setPostDetail(data.post);
+      setPostCategory(data.post.category._id);
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message, { theme: "colored" });
+    }
   };
 
   const handleLike = async () => {
@@ -81,7 +89,6 @@ const PostDetail = () => {
   const countRate = async () => {
     try {
       const { data } = await axios.get(`/count-rate/${post_id}`);
-      // console.log(data);
       setLikes({
         data: data.likes,
         count: data.likes.length
@@ -109,6 +116,7 @@ const PostDetail = () => {
         dislikeData={dislikes.data}
         postId={post_id}
         state={state}
+        postCategory={postCategory}
       />
       <Comment state={state} />
     </>

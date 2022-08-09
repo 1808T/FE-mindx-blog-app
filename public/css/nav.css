@@ -6,20 +6,34 @@
   margin-bottom: 50px;
 }
 
-.nav-intro {
-  width: 15vw;
-}
-
 .nav-intro span {
   border: none !important;
 }
 
-.search-bar {
-  width: 20vw;
+.nav-info {
+  width: 35vw;
 }
 
-.nav-info {
-  width: 25vw;
+@media screen and (max-width: 1600px) {
+  .user-email {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .btn.btn-outline-secondary.d-flex.justify-content-center.align-items-center.p-2.notification {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .btn.btn-outline-secondary.d-flex.justify-content-center.align-items-center.p-2.create-post-btn {
+    display: none !important;
+  }
+
+  .btn-group {
+    display: none !important;
+  }
 }
 
 .nav-link,

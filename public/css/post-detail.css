@@ -4,6 +4,7 @@
 }
 
 .post-detail-path {
+  position: relative;
   font-weight: 400;
   font-size: 1.125rem;
   color: #18a0fb;
@@ -12,6 +13,7 @@
 .post-detail-title {
   font-size: 3rem;
   font-weight: 700;
+  text-align: justify;
 }
 
 .post-detail-info {
@@ -25,4 +27,11 @@
 
 .rate {
   font-size: 1.125rem;
+}
+
+.more-posts-container {
+  width: 70vw;
+  display: grid;
+  grid-template: 400px / 1fr 1fr 1fr;
+  column-gap: 50px;
 }

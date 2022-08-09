@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import {
   FacebookFilled,
@@ -32,14 +31,6 @@ const Footer = () => {
           className="p-1"
           alt="logo"
         />
-        <div className="d-flex align-items-center">
-          <Link
-            to="/about"
-            className="text-white btn btn-outline-secondary"
-            style={{ border: "none" }}>
-            About
-          </Link>
-        </div>
       </div>
       <div
         className="d-flex flex-column justify-content-evenly font-face-mulish p-2"

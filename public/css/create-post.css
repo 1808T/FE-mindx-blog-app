@@ -1,4 +1,5 @@
-.container-fluid.create-post-form {
-  position: absolute;
-  top: 10vh;
+.container-fluid.create-post-form,
+.container-fluid.edit-post-form {
+  position: relative;
+  min-height: 100%;
 }

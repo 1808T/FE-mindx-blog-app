@@ -138,7 +138,7 @@ const CreatePost = () => {
   return (
     <>
       <div className="container-fluid create-post-form">
-        <div className="row py-5">
+        <div className="row">
           <div className="col-md-6 offset-md-3">
             <div className="d-flex align-items-center justify-content-center font-face-mulish">
               <h1>New post</h1>

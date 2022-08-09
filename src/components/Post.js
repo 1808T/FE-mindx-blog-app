@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Image, Avatar } from "antd";
 import {
@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import parse from "html-react-parser";
 import moment from "moment";
+import axios from "axios";
 
 const Post = ({
   userId,
@@ -22,19 +23,45 @@ const Post = ({
   dislikes,
   likeData,
   dislikeData,
-  state
+  postCategory
 }) => {
+  const [morePosts, setMorePosts] = useState([]);
+
+  useEffect(() => {
+    getPostsWithSameCategory();
+  }, [postCategory]);
+
+  const getPostsWithSameCategory = async () => {
+    if (postCategory) {
+      try {
+        const { data } = await axios.get(`/category/${postCategory}`);
+        setMorePosts(data.posts);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <>
-      <div className="container post-detail-container font-face-montserrat">
-        <div className="post-detail-path mb-3">
-          <Link to="/">Home</Link>
-          <span> / </span>
-          <Link to={`/${postDetail._id}`}>{postDetail.title}</Link>
-        </div>
-        <div
-          className="d-flex align-items-center justify-content-between"
-          style={{ width: "70vw" }}>
+      <div
+        className="container post-detail-container font-face-montserrat d-flex flex-column justify-content-center align-items-center"
+        style={{ width: "70vw" }}>
+        <div className="d-flex justify-content-center flex-column" style={{ width: "70vw" }}>
+          <div className="post-detail-path mb-3">
+            <Link to="/">Home</Link>
+            <span> / </span>
+            <Link to={`/post/${postDetail._id}`}>
+              {postDetail && postDetail.title && postDetail.title.split(" ").length < 5
+                ? postDetail.title
+                : postDetail.title
+                    .split(" ")
+                    .filter((word, index) => {
+                      return index < 5;
+                    })
+                    .join(" ") + " ..."}
+            </Link>
+          </div>
           <h1 className="post-detail-title">{postDetail.title}</h1>
         </div>
         <div
@@ -130,9 +157,55 @@ const Post = ({
             className="btn btn-outline-light p-2 text-info"
           />
         </div>
-        <div>
-          <h4>More Posts</h4>
-        </div>
+        {morePosts && morePosts.filter(post => post._id !== postDetail._id).length === 0 ? (
+          <></>
+        ) : (
+          <div>
+            <h4 className="mb-3">More Posts:</h4>
+            <div className="more-posts-container">
+              {morePosts &&
+                morePosts
+                  .filter(post => post._id !== postDetail._id)
+                  .slice(0, 3)
+                  .map(post => {
+                    return (
+                      <div
+                        key={post._id}
+                        className="card d-flex flex-column justify-content-between">
+                        <Link
+                          className="card-body"
+                          style={{
+                            backgroundImage: `url(${post.image.url})`,
+                            backgroundSize: "cover",
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center",
+                            height: "400px"
+                          }}
+                          to={`/post/${post._id}`}></Link>
+                        <div className="card-footer d-flex flex-column justify-content-center">
+                          <h6>
+                            {post.title.split(" ").length < 6
+                              ? post.title
+                              : post.title
+                                  .split(" ")
+                                  .filter((word, index) => {
+                                    return index < 6;
+                                  })
+                                  .join(" ") + "..."}
+                          </h6>
+                          {post.description
+                            .split(" ")
+                            .filter((char, index) => {
+                              return index < 10;
+                            })
+                            .join(" ") + "..."}
+                        </div>
+                      </div>
+                    );
+                  })}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

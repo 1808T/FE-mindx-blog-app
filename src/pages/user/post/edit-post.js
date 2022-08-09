@@ -32,7 +32,7 @@ const EditPost = () => {
 
   const getUserPost = async () => {
     try {
-      const { data } = await axios.get(`/user/your-posts/${post_id}`);
+      const { data } = await axios.get(`/your-posts/${post_id}`);
       setTitle(data.post.title);
       setDescription(data.post.description);
       setContent(data.post.content);
@@ -58,7 +58,7 @@ const EditPost = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.put(`/user/edit/${post_id}`, {
+      const { data } = await axios.put(`/your-posts/edit/${post_id}`, {
         title,
         description,
         content,
@@ -120,14 +120,12 @@ const EditPost = () => {
 
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid edit-post-form">
         <div className="row">
-          <div className="col">
-            <h1 className="display-4 text-center">Edit Post</h1>
-          </div>
-        </div>
-        <div className="row py-5">
           <div className="col-md-6 offset-md-3">
+            <div className="d-flex align-items-center justify-content-center font-face-mulish">
+              <h1>Edit Post</h1>
+            </div>
             <form className="form-group" onSubmit={handleSubmit}>
               <Input
                 title="Title *"
@@ -145,7 +143,7 @@ const EditPost = () => {
                 value={description}
                 handleChange={handleDescriptionChange}
               />
-              <div className="form-group p-2">
+              <div className="form-group mb-3">
                 <small>
                   <label className="text-muted">Content *</label>
                 </small>

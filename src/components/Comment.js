@@ -112,7 +112,7 @@ const Comment = ({ state }) => {
   };
 
   return (
-    <div className="comment-container container">
+    <div className="comment-container container mt-3">
       <h2>Comments</h2>
       <form onSubmit={postComment} className="d-flex align-items-end mb-4">
         <div className="form-group me-3">

@@ -3,13 +3,73 @@
   min-height: 100%;
 }
 
-/* .home-title {
-  position: relative;
-  top: 15vh;
-} */
+.home-title {
+  display: flex;
+  justify-content: space-between;
+}
 
-.home-container {
+.newest-posts-container,
+.book-posts-container,
+.game-posts-container {
   display: grid;
-  grid-template: 600px 600px/ 1fr 1fr;
-  gap: 50px 100px;
+  grid-template: 600px/ 1fr 1fr;
+  gap: 50px 50px;
+}
+
+.art-posts-container,
+.food-posts-container {
+  display: grid;
+  grid-template-areas:
+    "a a b"
+    "a a b"
+    "a a c"
+    "a a c";
+  grid-template-rows: 150px 150px 150px 150px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px 25px;
+}
+
+.art-posts-container div.card:first-child,
+.food-posts-container div.card:first-child {
+  grid-area: a;
+}
+
+.art-posts-container div.card:nth-child(2),
+.food-posts-container div.card:nth-child(2) {
+  grid-area: b;
+}
+
+.art-posts-container div.card:last-child,
+.food-posts-container div.card:last-child {
+  grid-area: c;
+}
+
+.art-posts-container div.card:nth-child(2) div.card-footer,
+.art-posts-container div.card:last-child div.card-footer,
+.food-posts-container div.card:nth-child(2) div.card-footer,
+.food-posts-container div.card:last-child div.card-footer {
+  height: 30%;
+  padding-top: 30px;
+}
+
+.art-posts-container div.card:nth-child(2) div.card-footer h4,
+.art-posts-container div.card:last-child div.card-footer h4,
+.food-posts-container div.card:nth-child(2) div.card-footer h4,
+.food-posts-container div.card:last-child div.card-footer h4 {
+  font-size: 1rem;
+}
+
+.art-posts-container div.card:nth-child(2) div.art-posts-description,
+.art-posts-container div.card:nth-child(2) div.art-post-author,
+.art-posts-container div.card:last-child div.art-posts-description,
+.art-posts-container div.card:last-child div.art-post-author,
+.food-posts-container div.card:nth-child(2) div.food-posts-description,
+.food-posts-container div.card:nth-child(2) div.food-post-author,
+.food-posts-container div.card:last-child div.food-posts-description,
+.food-posts-container div.card:last-child div.food-post-author {
+  display: none;
+}
+
+.card-footer {
+  background-color: #ffffff !important;
 }

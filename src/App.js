@@ -10,7 +10,7 @@ import Register from "./pages/register";
 import ForgotPassword from "./pages/forgot-password";
 import Profile from "./pages/user/profile";
 import ChangePassword from "./pages/user/change-password";
-import AllUserPost from "./pages/user/post/all-post";
+import AllUserPost from "./pages/user/post/your-posts";
 import CreatePost from "./pages/user/post/create-post";
 import EditPost from "./pages/user/post/edit-post";
 import Footer from "./components/Footer";
