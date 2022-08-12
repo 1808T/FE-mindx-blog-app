@@ -1,5 +1,6 @@
 .container-fluid.create-post-form,
 .container-fluid.edit-post-form {
   position: relative;
-  min-height: 100%;
+  min-height: 55vh;
+  top: 50px;
 }

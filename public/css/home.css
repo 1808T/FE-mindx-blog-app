@@ -8,6 +8,22 @@
   justify-content: space-between;
 }
 
+.container.category-container {
+  width: 70vw;
+  height: 50px;
+}
+
+@media screen and (max-width: 780px) {
+  .container.category-container a {
+    display: none !important;
+  }
+}
+
+.container.category-container a {
+  color: #000000;
+  text-decoration: underline;
+}
+
 .newest-posts-container,
 .book-posts-container,
 .game-posts-container {

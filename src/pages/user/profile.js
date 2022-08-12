@@ -191,8 +191,8 @@ const Profile = () => {
                   value={state.user.username}
                   disabled={true}
                 />
-                <div style={{ width: "2vw" }}></div>
-                <div className="form-group mb-3">
+                <div style={{ width: "2vw" }} className="gender-input__1"></div>
+                <div className="form-group mb-3 gender-input__1">
                   <small>
                     <label className="text-black">Gender</label>
                   </small>
@@ -210,6 +210,23 @@ const Profile = () => {
                   </select>
                 </div>
               </div>
+              <div className="form-group mb-3 gender-input__2">
+                <small>
+                  <label className="text-black">Gender</label>
+                </small>
+                <select
+                  className="form-select form-select-sm"
+                  defaultValue={user.gender || "Gender"}
+                  name="gender"
+                  onChange={handleChange}>
+                  <option disabled hidden>
+                    Gender
+                  </option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
+              </div>
               <div className="form-group d-flex justify-content-between" style={{ width: "50%" }}>
                 <Input
                   title="First name"
@@ -219,16 +236,27 @@ const Profile = () => {
                   handleChange={handleChange}
                   value={user.firstName}
                 />
-                <div style={{ width: "2vw" }}></div>
-                <Input
-                  title="Last name"
-                  type="text"
-                  name="lastName"
-                  placeholder="Enter your last name"
-                  handleChange={handleChange}
-                  value={user.lastName}
-                />
+                <div style={{ width: "2vw" }} className="last-name-input__1"></div>
+                <div className="last-name-input__1" style={{ width: "50%" }}>
+                  <Input
+                    title="Last name"
+                    type="text"
+                    name="lastName"
+                    placeholder="Enter your last name"
+                    handleChange={handleChange}
+                    value={user.lastName}
+                  />
+                </div>
               </div>
+              <Input
+                title="Last name"
+                type="text"
+                name="lastName"
+                placeholder="Enter your last name"
+                handleChange={handleChange}
+                value={user.lastName}
+                className="last-name-input__2"
+              />
               <Input
                 title="Date of birth"
                 type={type}

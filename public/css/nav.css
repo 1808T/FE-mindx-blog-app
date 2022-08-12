@@ -3,7 +3,6 @@
   height: 10vh;
   background: radial-gradient(circle, rgba(16, 95, 93, 1) 0%, rgba(25, 35, 76, 1) 100%);
   z-index: 1;
-  margin-bottom: 50px;
 }
 
 .nav-intro span {
@@ -21,12 +20,10 @@
 }
 
 @media screen and (max-width: 1250px) {
-  .btn.btn-outline-secondary.d-flex.justify-content-center.align-items-center.p-2.notification {
+  .btn.btn-outline-secondary.d-flex.justify-content-center.align-items-center.p-2.management {
     display: none !important;
   }
-}
 
-@media screen and (max-width: 1000px) {
   .btn.btn-outline-secondary.d-flex.justify-content-center.align-items-center.p-2.create-post-btn {
     display: none !important;
   }
@@ -36,12 +33,51 @@
   }
 }
 
+@media screen and (max-width: 750px) {
+  .nav-link {
+    display: none !important;
+  }
+
+  .sidebar-btn__1 {
+    display: none !important;
+  }
+
+  .search-bar > input {
+    width: 40vw !important;
+  }
+
+  .d-flex.align-items-center.sidebar-btn__2-container {
+    display: flex !important;
+  }
+
+  .btn.btn-outline-secondary.me-2.text-white.d-flex.align-items-center.login-btn,
+  .btn.btn-light.d-flex.align-items-center.register-btn {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .btn.btn-outline-secondary.me-2.text-white.d-flex.align-items-center.login-btn,
+  .btn.btn-light.d-flex.align-items-center.register-btn {
+    display: none !important;
+  }
+}
+
 .nav-link,
 .profile-frame {
   border: none !important;
 }
 
-.notification-icon img {
+.management-icon img {
   width: 16px;
   height: 16px;
+}
+
+.login-btn,
+.register-btn {
+  border: none !important;
+}
+
+.d-flex.sidebar-btn__2-container {
+  display: none !important;
 }

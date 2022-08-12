@@ -6,7 +6,7 @@ import moment from "moment";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const Comment = ({ state }) => {
+const Comment = ({ state, postDetail }) => {
   const [comment, setComment] = useState("");
   const [postComments, setPostComments] = useState([]);
   const [editMode, setEditMode] = useState(false);
@@ -112,7 +112,9 @@ const Comment = ({ state }) => {
   };
 
   return (
-    <div className="comment-container container mt-3">
+    <div
+      className="comment-container container mt-3"
+      hidden={postDetail && postDetail.status !== "approved"}>
       <h2>Comments</h2>
       <form onSubmit={postComment} className="d-flex align-items-end mb-4">
         <div className="form-group me-3">

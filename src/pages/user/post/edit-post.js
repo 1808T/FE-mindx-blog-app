@@ -14,6 +14,7 @@ const EditPost = () => {
   const [state] = useContext(UserContext);
   const navigate = useNavigate();
   const { post_id } = useParams();
+  const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [content, setContent] = useState({ text: "" });
@@ -26,13 +27,14 @@ const EditPost = () => {
   let path = window.location.pathname;
 
   useEffect(() => {
-    getUserPost();
+    if (state && state.token) getUserPost();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [state && state.token]);
 
   const getUserPost = async () => {
     try {
       const { data } = await axios.get(`/your-posts/${post_id}`);
+      setCategory(data.post.category.name);
       setTitle(data.post.title);
       setDescription(data.post.description);
       setContent(data.post.content);
@@ -44,6 +46,10 @@ const EditPost = () => {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
     }
+  };
+
+  const handleCategoryChange = e => {
+    setCategory(e.target.value);
   };
 
   const handleTitleChange = e => {
@@ -59,6 +65,7 @@ const EditPost = () => {
     setLoading(true);
     try {
       const { data } = await axios.put(`/your-posts/edit/${post_id}`, {
+        category,
         title,
         description,
         content,
@@ -127,6 +134,28 @@ const EditPost = () => {
               <h1>Edit Post</h1>
             </div>
             <form className="form-group" onSubmit={handleSubmit}>
+              <div className="form-group mb-3">
+                <small>
+                  <label className="text-black">Topic *</label>
+                </small>
+                <select
+                  className="form-select form-select-sm"
+                  value={category}
+                  name="question"
+                  onChange={handleCategoryChange}>
+                  <option disabled hidden>
+                    Select topic
+                  </option>
+                  <option>Art</option>
+                  <option>Book</option>
+                  <option>Food</option>
+                  <option>Game</option>
+                  <option>Health And Fitness</option>
+                  <option>Music</option>
+                  <option>Photography</option>
+                  <option>Technology</option>
+                </select>
+              </div>
               <Input
                 title="Title *"
                 type="text"

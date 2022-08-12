@@ -12,6 +12,7 @@ const PostDetail = () => {
   const [postDetail, setPostDetail] = useState({
     title: "",
     content: "",
+    status: "",
     postedBy: {
       avatar: {}
     },
@@ -118,7 +119,7 @@ const PostDetail = () => {
         state={state}
         postCategory={postCategory}
       />
-      <Comment state={state} />
+      <Comment state={state} postDetail={postDetail} />
     </>
   );
 };

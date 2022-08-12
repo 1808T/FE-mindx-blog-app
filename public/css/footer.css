@@ -6,3 +6,34 @@
   background: radial-gradient(circle, rgba(16, 95, 93, 1) 0%, rgba(25, 35, 76, 1) 100%);
   margin-top: 25vh;
 }
+
+@media screen and (max-width: 1450px) {
+  .d-flex.flex-column.justify-content-evenly.font-face-mulish.p-2.contact-footer {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .social-media-footer,
+  .text-white.d-flex.justify-content-end.copy-right-footer__1 {
+    display: none !important;
+  }
+
+  .copy-right-footer__2 {
+    display: block !important;
+  }
+
+  .d-flex.text-white.align-items-center.footer-logo {
+    display: none !important;
+  }
+
+  .footer-container-fluid.d-flex.align-items-center.p-5.justify-content-between {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 5px !important;
+  }
+}
+
+.copy-right-footer__2 {
+  display: none;
+}

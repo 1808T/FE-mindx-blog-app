@@ -23,6 +23,7 @@ const AllUserPost = () => {
       const { data } = await axios.get(`/your-posts`);
       setAllUserPosts(data.posts);
       data.ok ? setOk(true) : setOk(false);
+      return data.posts;
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
@@ -34,11 +35,16 @@ const AllUserPost = () => {
   return !ok ? (
     <SyncOutlined
       spin
-      className="d-flex justify-content-center align-items-center display-1 text-primary p-5"
+      style={{ width: "100vw", height: "50vh" }}
+      className="d-flex justify-content-center align-items-center text-primary p-5 display-1"
     />
   ) : (
     <>
-      <UserPostList allUserPosts={allUserPosts} getAllUserPosts={handlePosts} />
+      <UserPostList
+        allUserPosts={allUserPosts}
+        setAllUserPosts={setAllUserPosts}
+        getAllUserPosts={handlePosts}
+      />
     </>
   );
 };

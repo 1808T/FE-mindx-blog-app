@@ -1,5 +1,6 @@
 .profile-container-fluid {
-  min-height: 60vh;
+  min-height: 55vh;
+  top: 50px;
   width: 100vw;
   position: relative;
 }
@@ -13,4 +14,30 @@
 
 .profile-input-group .form-group.mb-3 {
   width: 50%;
+}
+
+.last-name-input__1 div.form-group.mb-3 {
+  width: 100% !important;
+}
+
+.gender-input__2,
+.last-name-input__2 {
+  display: none !important;
+}
+
+@media screen and (max-width: 1000px) {
+  .gender-input__2,
+  .last-name-input__2 {
+    display: block !important;
+  }
+
+  .form-group.d-flex.justify-content-between div.form-group.mb-3 {
+    width: 100%;
+  }
+
+  .gender-input__1,
+  .last-name-input__1,
+  .last-name-input__1.form-group.mb-3 {
+    display: none !important;
+  }
 }

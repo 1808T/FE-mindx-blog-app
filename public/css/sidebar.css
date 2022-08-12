@@ -3,15 +3,55 @@
   display: none;
   top: 0;
   left: 0;
-  width: 15vw;
+  width: 20vw;
   height: 100vh;
   background: linear-gradient(90deg, rgba(25, 35, 76, 1) 0%, rgba(22, 53, 81, 1) 100%);
   z-index: 3;
 }
 
+@media screen and (max-height: 735px) {
+  .sidebar {
+    height: 100vh;
+  }
+
+  .logout {
+    position: relative !important;
+  }
+}
+
+@media screen and (max-height: 800px) {
+  .pb-3.d-flex.flex-column.align-items-center.justify-content-center.logo-sidebar {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 1650px) {
+  .sidebar {
+    width: 25vw;
+  }
+}
+
+@media screen and (max-width: 1250px) and (min-width: 600px) {
+  .sidebar {
+    width: 40vw !important;
+  }
+
+  .sidebar-btn.btn.btn-outline-secondary.text-white.mb-3.d-flex.justify-content-center.align-items-center.management-sidebar,
+  .sidebar-btn.btn.btn-outline-secondary.text-white.mb-3.d-flex.justify-content-center.align-items-center.create-btn-sidebar {
+    display: flex !important;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .sidebar {
     width: 100vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sidebar-btn.btn.btn-outline-secondary.text-white.mb-3.d-flex.justify-content-center.align-items-center.management-sidebar,
+  .sidebar-btn.btn.btn-outline-secondary.text-white.mb-3.d-flex.justify-content-center.align-items-center.create-btn-sidebar {
+    display: flex !important;
   }
 }
 
@@ -28,4 +68,29 @@
   position: absolute;
   bottom: 0;
   border-top: 1px solid white !important;
+}
+
+.sidebar-btn.btn.btn-outline-secondary.text-white.mb-3.d-flex.justify-content-center.management-sidebar,
+.sidebar-btn.btn.btn-outline-secondary.text-white.mb-3.d-flex.justify-content-center.create-btn-sidebar {
+  display: none !important;
+}
+
+.logo-login-sidebar {
+  width: 80%;
+  border-bottom: 1px solid white;
+}
+
+.btn-login-group {
+  padding-top: 20px;
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.nav-link-sidebar {
+  /* display: none; */
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 20px;
 }

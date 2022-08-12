@@ -1,0 +1,65 @@
+.post-management-container,
+.user-management-container {
+  position: relative;
+  min-height: 55vh;
+  top: 50px;
+}
+
+.post-management-container table,
+.user-management-container table {
+  width: 100%;
+}
+
+.container.post-management-container th,
+.container.user-management-container th {
+  text-align: center;
+  font-weight: 600;
+  color: #5c6e9a;
+  cursor: pointer;
+}
+
+.container.post-management-container tbody > tr,
+.container.user-management-container tbody > tr {
+  border-bottom: 1px solid #5c6e9a;
+}
+
+.container.post-management-container tbody > tr > td:nth-child(2),
+.container.user-management-container tbody > tr > td:nth-child(2) {
+  color: #9ca7c4;
+}
+
+.container.post-management-container tbody > tr:last-child,
+.container.user-management-container tbody > tr:last-child {
+  border: none;
+}
+
+.container.post-management-container td,
+.container.user-management-container td {
+  color: #5c6e9a;
+  font-weight: 400;
+  padding: 0 2vw;
+}
+
+.container.post-management-container td:nth-child(3),
+.container.post-management-container td:nth-child(4),
+.container.post-management-container td:nth-child(5),
+.container.user-management-container td:nth-child(3) {
+  text-align: center;
+}
+
+.container.post-management-container td > div.status-draft {
+  cursor: auto;
+  background-color: aqua;
+  color: #5c6e9a;
+  font-weight: 700;
+  width: 100%;
+}
+
+.container.post-management-container td > div.status-approved {
+  cursor: auto;
+  background-color: #55e096;
+  color: #ab273e;
+  font-weight: 700;
+  width: 100%;
+  font-size: 1rem;
+}

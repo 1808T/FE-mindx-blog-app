@@ -24,7 +24,7 @@ const Footer = () => {
     <footer
       className="container-fluid footer-container-fluid d-flex align-items-center p-5 justify-content-between"
       hidden={current === "/login" || current === "/register" || current === "/forgot-password"}>
-      <div className="d-flex text-white align-items-center" style={{ width: "18%" }}>
+      <div className="d-flex text-white align-items-center footer-logo">
         <img
           src="/images/logo.svg"
           style={{ width: "64px", height: "64px" }}
@@ -33,11 +33,11 @@ const Footer = () => {
         />
       </div>
       <div
-        className="d-flex flex-column justify-content-evenly font-face-mulish p-2"
+        className="d-flex flex-column justify-content-evenly font-face-mulish p-2 contact-footer"
         style={{ fontSize: "1rem", width: "20vw" }}>
         <div className="d-flex align-items-center">
           <HomeFilled style={{ fontSize: "125%" }} className="p-2" />
-          <span>Hanoi, Vietnam</span>
+          <span>Somewhere at Hanoi, Vietnam</span>
         </div>
         <div className="d-flex justify-content-between">
           <div className="d-flex align-items-center">
@@ -52,7 +52,7 @@ const Footer = () => {
       </div>
       <div className="d-flex flex-column align-items-end font-face-mulish">
         <div className="d-flex justify-content-end align-items-center text-white">
-          <span className="text-end">Social media: </span>
+          <span className="text-end social-media-footer">Social media: </span>
           <FacebookFilled
             style={{ fontSize: "150%", border: "none" }}
             className="btn btn-outline-secondary p-2"
@@ -74,9 +74,14 @@ const Footer = () => {
             className="btn btn-outline-secondary p-2"
           />
         </div>
-        <div className="text-white d-flex justify-content-end" style={{ fontSize: "1rem" }}>
+        <div
+          className="text-white d-flex justify-content-end copy-right-footer__1"
+          style={{ fontSize: "1rem" }}>
           Copyright @ 2022. Your Company. We love you!
         </div>
+      </div>
+      <div className="text-white font-face-mulish copy-right-footer__2">
+        Copyright @ 2022. Your Company. We love you!
       </div>
     </footer>
   );

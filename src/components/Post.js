@@ -90,7 +90,7 @@ const Post = ({
             </Link>
             <div>{moment(postDetail.createdAt).fromNow()}</div>
           </div>
-          <div className="d-flex rate">
+          <div className="d-flex rate" hidden={postDetail && postDetail.status !== "approved"}>
             <div>
               {likeData.map(like => like.ratedBy).includes(userId) ? (
                 <LikeFilled
@@ -142,7 +142,7 @@ const Post = ({
         </div>
         <div
           style={{ width: "70vw", fontSize: "1.5rem", borderTop: "1px solid #6DE4EA" }}
-          className="d-flex align-items-center pt-3 pb-3">
+          className="d-flex align-items-center pt-3 pb-3 mb-3">
           <span>Share this: </span>
           <FacebookFilled
             style={{ fontSize: "125%", border: "none" }}
@@ -160,7 +160,7 @@ const Post = ({
         {morePosts && morePosts.filter(post => post._id !== postDetail._id).length === 0 ? (
           <></>
         ) : (
-          <div>
+          <div hidden={postDetail && postDetail.status !== "approved"}>
             <h4 className="mb-3">More Posts:</h4>
             <div className="more-posts-container">
               {morePosts &&

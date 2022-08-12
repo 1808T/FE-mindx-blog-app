@@ -1,6 +1,8 @@
 .post-detail-container {
   position: relative;
+  min-height: 55vh;
   width: 70vw;
+  top: 50px;
 }
 
 .post-detail-path {
