@@ -51,7 +51,12 @@ const Post = ({
         style={{ width: "70vw" }}>
         <div className="d-flex justify-content-center flex-column" style={{ width: "70vw" }}>
           <div className="post-detail-path mb-3">
-            <Link to="/">Home</Link>
+            <span
+              onClick={() => {
+                navigate("/");
+              }}>
+              Home
+            </span>
             <span> / </span>
             <Link to={`/post/${postDetail._id}`}>
               {postDetail && postDetail.title && postDetail.title.split(" ").length < 5
@@ -197,6 +202,7 @@ const Post = ({
                           className="card-body"
                           onClick={() => {
                             navigate(`/post/${post._id}`);
+                            window.location.reload();
                           }}
                           style={{
                             backgroundImage: `url(${post.image.url})`,

@@ -30,7 +30,7 @@ const Home = () => {
   return loading ? (
     <SyncOutlined
       spin
-      style={{ width: "100vw", height: "55vh" }}
+      style={{ width: "100vw", height: "53vh" }}
       className="d-flex justify-content-center align-items-center text-primary p-5 display-1"
     />
   ) : (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Avatar } from "antd";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { SyncOutlined } from "@ant-design/icons";
 import moment from "moment";
 import axios from "axios";
 
@@ -10,6 +11,7 @@ const OtherProfile = () => {
     avatar: {},
     about: {}
   });
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -20,16 +22,25 @@ const OtherProfile = () => {
   const getUserInfo = async () => {
     const userId = location.pathname.split("/")[2];
     try {
+      setLoading(true);
       const { data } = await axios.get(`/user/${userId}`);
       console.log(data);
       setUser(data.user);
+      setLoading(false);
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, { theme: "colored" });
+      setLoading(false);
     }
   };
 
-  return (
+  return loading ? (
+    <SyncOutlined
+      spin
+      style={{ width: "100vw", height: "55vh" }}
+      className="d-flex justify-content-center align-items-center text-primary p-5 display-1"
+    />
+  ) : (
     <div className="container other-profile-container d-flex flex-column justify-content-center align-items-center font-face-mulish text-black">
       <h1>{user.username}</h1>
       <div>
