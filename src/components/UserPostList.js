@@ -140,7 +140,7 @@ const UserPostList = ({ allUserPosts, getAllUserPosts }) => {
                         </div>
                       </div>
                     </th>
-                    <th>
+                    <th className="category-th">
                       <div
                         className="d-flex align-items-center justify-content-center"
                         onClick={sortByCategory}>
@@ -175,8 +175,8 @@ const UserPostList = ({ allUserPosts, getAllUserPosts }) => {
                   userPosts.map(userPost => {
                     return (
                       <tr key={userPost._id}>
-                        <td className="d-flex align-items-center h-100">
-                          <span>
+                        <td className="d-flex align-items-center h-100 your-post-title">
+                          <span className="post-image-preview">
                             <Image
                               src={userPost.image.url}
                               width={64}
@@ -207,12 +207,12 @@ const UserPostList = ({ allUserPosts, getAllUserPosts }) => {
                             {userPost.status === "draft" ? (
                               <div className="d-flex justify-content-center">
                                 <FormOutlined className="p-1" />
-                                <span>{userPost.status}</span>
+                                <span className="post-status-span">{userPost.status}</span>
                               </div>
                             ) : (
                               <div className="d-flex justify-content-evenly">
                                 <CheckOutlined className="p-1" />
-                                <span>{userPost.status}</span>
+                                <span className="post-status-span">{userPost.status}</span>
                               </div>
                             )}
                           </div>

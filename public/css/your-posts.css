@@ -77,3 +77,30 @@
   color: blue !important;
   text-decoration: underline;
 }
+
+@media screen and (max-width: 1000px) {
+  .post-image-preview,
+  .post-status-span {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .container.your-post-container tbody td,
+  .container.your-post-container tbody th {
+    font-size: 12px !important;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container.your-post-container tbody td:nth-child(3),
+  .category-th {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .container.your-post-container tbody td:first-child {
+    width: 20vw;
+  }
+}

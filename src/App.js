@@ -18,15 +18,17 @@ import Footer from "./components/Footer";
 import SearchResult from "./pages/search";
 import UserManagement from "./pages/admin/user-management";
 import PostManagement from "./pages/admin/post-management";
+import Faqs from "./pages/faqs";
+import About from "./pages/about";
 import Error from "./pages/error";
-import artPosts from "./pages/category/art";
-import bookPosts from "./pages/category/book";
-import foodPosts from "./pages/category/food";
-import gamePosts from "./pages/category/game";
-import healthPosts from "./pages/category/health";
-import musicPosts from "./pages/category/music";
-import photographyPosts from "./pages/category/photography";
-import technologyPosts from "./pages/category/technology";
+import ArtPosts from "./pages/category/art";
+import BookPosts from "./pages/category/book";
+import FoodPosts from "./pages/category/food";
+import GamePosts from "./pages/category/game";
+import HealthPosts from "./pages/category/health";
+import MusicPosts from "./pages/category/music";
+import PhotographyPosts from "./pages/category/photography";
+import TechnologyPosts from "./pages/category/technology";
 
 const App = () => {
   return (
@@ -48,21 +50,21 @@ const App = () => {
           <Route path="edit/:post_id" element={<EditPost />} />
           <Route path="change-password" element={<ChangePassword />} />
         </Route>
-        <Route path="faqs" />
-        <Route path="about" />
+        <Route path="faqs" element={<Faqs />} />
+        <Route path="about" element={<About />} />
         <Route path="admin">
           <Route path="post-management" element={<PostManagement />} />
           <Route path="user-management" element={<UserManagement />} />
         </Route>
         <Route path="category">
-          <Route path="art" element={<artPosts />} />
-          <Route path="book" element={<bookPosts />} />
-          <Route path="food" element={<foodPosts />} />
-          <Route path="game" element={<gamePosts />} />
-          <Route path="health" element={<healthPosts />} />
-          <Route path="music" element={<musicPosts />} />
-          <Route path="photography" element={<photographyPosts />} />
-          <Route path="technology" element={<technologyPosts />} />
+          <Route path="art" element={<ArtPosts />} />
+          <Route path="book" element={<BookPosts />} />
+          <Route path="food" element={<FoodPosts />} />
+          <Route path="game" element={<GamePosts />} />
+          <Route path="health" element={<HealthPosts />} />
+          <Route path="music" element={<MusicPosts />} />
+          <Route path="photography" element={<PhotographyPosts />} />
+          <Route path="technology" element={<TechnologyPosts />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

@@ -35,7 +35,7 @@ const AllUserPost = () => {
   return !ok ? (
     <SyncOutlined
       spin
-      style={{ width: "100vw", height: "50vh" }}
+      style={{ width: "100vw", height: "55vh" }}
       className="d-flex justify-content-center align-items-center text-primary p-5 display-1"
     />
   ) : (

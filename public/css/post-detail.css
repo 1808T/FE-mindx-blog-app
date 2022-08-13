@@ -15,7 +15,6 @@
 .post-detail-title {
   font-size: 3rem;
   font-weight: 700;
-  text-align: justify;
 }
 
 .post-detail-info {
@@ -32,8 +31,97 @@
 }
 
 .more-posts-container {
+  position: relative;
   width: 70vw;
   display: grid;
   grid-template: 400px / 1fr 1fr 1fr;
   column-gap: 50px;
+}
+
+.more-posts-card-footer {
+  padding: 50px;
+}
+
+@media screen and (max-width: 1250px) {
+  .post-detail-title {
+    font-size: 2rem;
+  }
+
+  .post-detail-info {
+    font-size: 1rem;
+  }
+
+  .post-detail-content {
+    font-size: 0.9rem;
+  }
+
+  .d-flex.rate,
+  .d-flex.rate span {
+    font-size: 100% !important;
+  }
+
+  .more-posts-container {
+    grid-template: 400px / 1fr 1fr;
+  }
+
+  .more-posts-container div.card:first-child {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .more-posts-container {
+    grid-template: 1fr 1fr / 50vw;
+  }
+
+  .more-posts-container div.card {
+    margin-bottom: 30px;
+  }
+
+  .more-posts-container div.card .card-body {
+    height: 200px !important;
+  }
+
+  .more-posts-title,
+  .more-posts-share {
+    font-size: 1.2rem !important;
+  }
+
+  .more-posts-card-footer {
+    height: 100px !important;
+    margin-bottom: 30px !important;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .post-detail-info.d-flex.justify-content-between.align-items-center.mb-5 {
+    flex-direction: column;
+  }
+
+  .post-detail-info.d-flex.align-items-center {
+    align-self: flex-start;
+  }
+
+  .d-flex.rate {
+    align-self: flex-end;
+  }
+
+  .post-detail-info {
+    font-size: 0.8rem;
+  }
+
+  .post-detail-content {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .more-posts-container {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr;
+  }
+
+  .post-detail-info {
+    font-size: 0.7rem;
+  }
 }

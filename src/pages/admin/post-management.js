@@ -207,7 +207,7 @@ const PostManagement = () => {
                   </div>
                 </div>
               </th>
-              <th>
+              <th className="category-th-post-management">
                 <div
                   className="d-flex align-items-center justify-content-center"
                   onClick={sortByCategory}>
@@ -240,7 +240,7 @@ const PostManagement = () => {
                 return (
                   <tr key={post._id}>
                     <td className="d-flex align-items-center h-100">
-                      <span>
+                      <span className="post-management-image-preview">
                         <Image src={post.image.url} width={64} height="auto" className="p-2" />
                       </span>
                       <Link
@@ -277,12 +277,12 @@ const PostManagement = () => {
                         {post.status === "draft" ? (
                           <div className="d-flex justify-content-center">
                             <FormOutlined className="p-1" />
-                            <span>{post.status}</span>
+                            <span className="post-management-status">{post.status}</span>
                           </div>
                         ) : (
                           <div className="d-flex justify-content-evenly">
                             <CheckOutlined className="p-1" />
-                            <span>{post.status}</span>
+                            <span className="post-management-status">{post.status}</span>
                           </div>
                         )}
                       </div>

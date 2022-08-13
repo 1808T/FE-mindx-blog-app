@@ -25,15 +25,14 @@
 }
 
 .newest-posts-container,
-.book-posts-container,
-.game-posts-container {
+.music-posts-container {
   display: grid;
   grid-template: 600px/ 1fr 1fr;
   gap: 50px 50px;
 }
 
-.art-posts-container,
-.food-posts-container {
+.game-posts-container,
+.tech-posts-container {
   display: grid;
   grid-template-areas:
     "a a b"
@@ -45,47 +44,131 @@
   gap: 50px 25px;
 }
 
-.art-posts-container div.card:first-child,
-.food-posts-container div.card:first-child {
+.newest-posts-footer {
+  height: 200px;
+}
+
+div.newest-posts-footer,
+div.game-posts-footer,
+div.music-posts-footer,
+div.tech-posts.footer {
+  padding: 50px;
+}
+
+.game-posts-container div.card:first-child,
+.tech-posts-container div.card:first-child {
   grid-area: a;
 }
 
-.art-posts-container div.card:nth-child(2),
-.food-posts-container div.card:nth-child(2) {
+.game-posts-container div.card:nth-child(2),
+.tech-posts-container div.card:nth-child(2) {
   grid-area: b;
 }
 
-.art-posts-container div.card:last-child,
-.food-posts-container div.card:last-child {
+.game-posts-container div.card:last-child,
+.tech-posts-container div.card:last-child {
   grid-area: c;
 }
 
-.art-posts-container div.card:nth-child(2) div.card-footer,
-.art-posts-container div.card:last-child div.card-footer,
-.food-posts-container div.card:nth-child(2) div.card-footer,
-.food-posts-container div.card:last-child div.card-footer {
+.game-posts-container div.card:nth-child(2) div.card-footer,
+.game-posts-container div.card:last-child div.card-footer,
+.tech-posts-container div.card:nth-child(2) div.card-footer,
+.tech-posts-container div.card:last-child div.card-footer {
   height: 30%;
   padding-top: 30px;
 }
 
-.art-posts-container div.card:nth-child(2) div.card-footer h4,
-.art-posts-container div.card:last-child div.card-footer h4,
-.food-posts-container div.card:nth-child(2) div.card-footer h4,
-.food-posts-container div.card:last-child div.card-footer h4 {
+.game-posts-container div.card:nth-child(2) div.card-footer h4,
+.game-posts-container div.card:last-child div.card-footer h4,
+.tech-posts-container div.card:nth-child(2) div.card-footer h4,
+.tech-posts-container div.card:last-child div.card-footer h4 {
   font-size: 1rem;
 }
 
-.art-posts-container div.card:nth-child(2) div.art-posts-description,
-.art-posts-container div.card:nth-child(2) div.art-post-author,
-.art-posts-container div.card:last-child div.art-posts-description,
-.art-posts-container div.card:last-child div.art-post-author,
-.food-posts-container div.card:nth-child(2) div.food-posts-description,
-.food-posts-container div.card:nth-child(2) div.food-post-author,
-.food-posts-container div.card:last-child div.food-posts-description,
-.food-posts-container div.card:last-child div.food-post-author {
+.game-posts-container div.card:nth-child(2) div.game-posts-description,
+.game-posts-container div.card:nth-child(2) div.game-post-author,
+.game-posts-container div.card:last-child div.game-posts-description,
+.game-posts-container div.card:last-child div.game-post-author,
+.tech-posts-container div.card:nth-child(2) div.tech-posts-description,
+.tech-posts-container div.card:nth-child(2) div.tech-post-author,
+.tech-posts-container div.card:last-child div.tech-posts-description,
+.tech-posts-container div.card:last-child div.tech-post-author {
   display: none;
 }
 
 .card-footer {
   background-color: #ffffff !important;
+}
+
+@media screen and (max-width: 1050px) {
+  .container.newest-posts-container.mb-5,
+  .container.music-posts-container.mb-5,
+  .container.game-posts-container.mb-5,
+  .container.tech-posts-container.mb-5 {
+    display: flex !important;
+    flex-direction: column;
+    width: 70vw;
+  }
+
+  .container.game-posts-container.mb-5 .card-body,
+  .container.tech-posts-container.mb-5 .card-body {
+    height: 400px;
+  }
+
+  .game-posts-container div.card:nth-child(2) div.game-posts-description,
+  .game-posts-container div.card:nth-child(2) div.game-post-author,
+  .game-posts-container div.card:last-child div.game-posts-description,
+  .game-posts-container div.card:last-child div.game-post-author,
+  .tech-posts-container div.card:nth-child(2) div.tech-posts-description,
+  .tech-posts-container div.card:nth-child(2) div.tech-post-author,
+  .tech-posts-container div.card:last-child div.tech-posts-description,
+  .tech-posts-container div.card:last-child div.tech-post-author {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .newest-posts-category {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .newest-posts-author,
+  .music-posts-author,
+  .game-post-author,
+  .tech-post-author {
+    display: none !important;
+  }
+
+  .card-body {
+    height: 300px !important;
+  }
+
+  .card.d-flex.flex-column.justify-content-between.font-face-montserrat.text-black
+    div.card-footer.d-flex.flex-column.justify-content-center {
+    height: auto !important;
+  }
+
+  div.newest-posts-footer,
+  div.game-posts-footer,
+  div.music-posts-footer,
+  div.tech-posts.footer {
+    height: 200px !important;
+    padding: 10px !important;
+  }
+
+  .card-footer.d-flex.flex-column.justify-content-center h4 {
+    font-size: 0.8rem;
+  }
+
+  .card-footer.d-flex.flex-column.justify-content-center p {
+    font-size: 0.65rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .card-body {
+    height: 200px !important;
+  }
 }

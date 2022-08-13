@@ -187,7 +187,7 @@ const UserManagement = () => {
                 return (
                   <tr key={user._id}>
                     <td>
-                      <div className="p-2">
+                      <div className="p-2 user-avatar-management">
                         {user && !user.avatar ? (
                           <Avatar
                             size={44}

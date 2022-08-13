@@ -111,7 +111,6 @@ const Profile = () => {
         phone: user.phone,
         avatar
       });
-      console.log(data);
       // UPDATE LOCAL STORAGE
       const info = JSON.parse(localStorage.getItem("auth"));
       info.user = data.user;

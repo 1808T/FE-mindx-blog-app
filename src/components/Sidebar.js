@@ -71,12 +71,14 @@ const Sidebar = ({ state, avatar, logout, hidden, toggleSidebar }) => {
           <Link
             to="/FAQs"
             className="btn btn-outline-secondary text-white"
+            onClick={toggleSidebar}
             style={{ border: "none" }}>
             FAQs
           </Link>
           <Link
             to="/About"
             className="btn btn-outline-secondary text-white"
+            onClick={toggleSidebar}
             style={{ border: "none" }}>
             About
           </Link>

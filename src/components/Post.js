@@ -23,12 +23,14 @@ const Post = ({
   dislikes,
   likeData,
   dislikeData,
-  postCategory
+  postCategory,
+  navigate
 }) => {
   const [morePosts, setMorePosts] = useState([]);
 
   useEffect(() => {
     getPostsWithSameCategory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postCategory]);
 
   const getPostsWithSameCategory = async () => {
@@ -82,12 +84,22 @@ const Post = ({
                 <Avatar size={40} src={postDetail.postedBy.avatar.url} />
               )}
             </div>
-            <Link className="pe-3 me-3" style={{ borderRight: "1px solid #00000080" }} to="/">
+            <span
+              className="pe-3 me-3"
+              style={{ borderRight: "1px solid #00000080", color: "#40A9FF", cursor: "pointer" }}
+              onClick={() => {
+                navigate(`/user/${postDetail.postedBy._id}`);
+              }}>
               {postDetail.postedBy.username}
-            </Link>
-            <Link className="pe-3 me-3" style={{ borderRight: "1px solid #00000080" }} to="/">
+            </span>
+            <span
+              className="pe-3 me-3"
+              style={{ borderRight: "1px solid #00000080", color: "#40A9FF", cursor: "pointer" }}
+              onClick={() => {
+                navigate(`/category/${postDetail.category.name}`);
+              }}>
               {postDetail.category.name}
-            </Link>
+            </span>
             <div>{moment(postDetail.createdAt).fromNow()}</div>
           </div>
           <div className="d-flex rate" hidden={postDetail && postDetail.status !== "approved"}>
@@ -142,26 +154,35 @@ const Post = ({
         </div>
         <div
           style={{ width: "70vw", fontSize: "1.5rem", borderTop: "1px solid #6DE4EA" }}
-          className="d-flex align-items-center pt-3 pb-3 mb-3">
+          className="d-flex align-items-center pt-3 pb-3 more-posts-share">
           <span>Share this: </span>
           <FacebookFilled
             style={{ fontSize: "125%", border: "none" }}
             className="btn btn-outline-light p-2 text-info"
+            onClick={() => {
+              navigate("/");
+            }}
           />
           <TwitterSquareFilled
             style={{ fontSize: "125%", border: "none" }}
             className="btn btn-outline-light p-2 text-info"
+            onClick={() => {
+              navigate("/");
+            }}
           />
           <InstagramFilled
             style={{ fontSize: "125%", border: "none" }}
             className="btn btn-outline-light p-2 text-info"
+            onClick={() => {
+              navigate("/");
+            }}
           />
         </div>
         {morePosts && morePosts.filter(post => post._id !== postDetail._id).length === 0 ? (
           <></>
         ) : (
-          <div hidden={postDetail && postDetail.status !== "approved"}>
-            <h4 className="mb-3">More Posts:</h4>
+          <div hidden={postDetail && postDetail.status !== "approved"} className="font-face-mulish">
+            <h4 className="mb-3 more-posts-title">More Posts:</h4>
             <div className="more-posts-container">
               {morePosts &&
                 morePosts
@@ -172,17 +193,22 @@ const Post = ({
                       <div
                         key={post._id}
                         className="card d-flex flex-column justify-content-between">
-                        <Link
+                        <div
                           className="card-body"
+                          onClick={() => {
+                            navigate(`/post/${post._id}`);
+                          }}
                           style={{
                             backgroundImage: `url(${post.image.url})`,
                             backgroundSize: "cover",
                             backgroundRepeat: "no-repeat",
                             backgroundPosition: "center",
-                            height: "400px"
-                          }}
-                          to={`/post/${post._id}`}></Link>
-                        <div className="card-footer d-flex flex-column justify-content-center">
+                            height: "400px",
+                            cursor: "pointer"
+                          }}></div>
+                        <div
+                          className="card-footer d-flex flex-column justify-content-center more-posts-card-footer"
+                          style={{ height: "200px" }}>
                           <h6>
                             {post.title.split(" ").length < 6
                               ? post.title
@@ -193,12 +219,7 @@ const Post = ({
                                   })
                                   .join(" ") + "..."}
                           </h6>
-                          {post.description
-                            .split(" ")
-                            .filter((char, index) => {
-                              return index < 10;
-                            })
-                            .join(" ") + "..."}
+                          <span style={{ color: "#40A9FF" }}>{post.postedBy.username}</span>
                         </div>
                       </div>
                     );

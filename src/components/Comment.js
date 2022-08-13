@@ -204,7 +204,9 @@ const Comment = ({ state, postDetail }) => {
                       </>
                     )}
                   </h6>
-                  <div style={{ fontSize: "1.125rem", color: "#000000cc" }}>
+                  <div
+                    style={{ fontSize: "1.125rem", color: "#000000cc" }}
+                    className="comment-username">
                     {postComment.postedBy.username}
                   </div>
                 </div>
@@ -223,7 +225,7 @@ const Comment = ({ state, postDetail }) => {
                     </div>
                   )}
 
-                  <div className="align-self-end pb-2">
+                  <div className="align-self-end pb-2 comment-time">
                     <span>{moment(postComment.createdAt).format("LLL")}</span>
                   </div>
                 </div>

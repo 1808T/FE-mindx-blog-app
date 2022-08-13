@@ -1,6 +1,41 @@
-.comment-container {
+.container.comment-container {
   position: relative;
-  width: 70vw;
+  width: 70vw !important;
+  top: 50px;
+}
+
+@media screen and (max-width: 1000px) {
+  .container.comment-container h2 {
+    font-size: 1.2rem;
+  }
+
+  .comment-content {
+    font-size: 0.8rem !important;
+  }
+
+  .comment-user-info span.ant-avatar.ant-avatar-circle {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 14px !important;
+  }
+
+  .comment-user-info span.ant-avatar-string {
+    line-height: 32px !important;
+  }
+
+  .comment-username {
+    font-size: 0.85rem !important;
+  }
+
+  .comment-time {
+    font-size: 12px !important;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .comment-time {
+    display: none;
+  }
 }
 
 .comment-user-info {

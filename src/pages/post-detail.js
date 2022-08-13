@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Post from "../components/Post";
 import Comment from "../components/Comment";
 import axios from "axios";
+import { SyncOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 
 const PostDetail = () => {
@@ -29,6 +30,7 @@ const PostDetail = () => {
     count: 0
   });
   const [postCategory, setPostCategory] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     handlePostById();
@@ -118,6 +120,7 @@ const PostDetail = () => {
         postId={post_id}
         state={state}
         postCategory={postCategory}
+        navigate={navigate}
       />
       <Comment state={state} postDetail={postDetail} />
     </>

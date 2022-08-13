@@ -1,0 +1,15 @@
+.all-category-posts-container {
+  position: relative;
+  top: 50px;
+  min-height: 55vh;
+  display: grid;
+  grid-template: 600px/ 1fr 1fr;
+  gap: 50px 50px;
+}
+
+@media screen and (max-width: 1000px) {
+  .all-category-posts-container {
+    display: flex;
+    flex-direction: column;
+  }
+}

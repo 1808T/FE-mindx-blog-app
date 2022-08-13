@@ -1,17 +1,13 @@
-import { UserContext } from "../context";
 import React, { useEffect } from "react";
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRightOutlined, SyncOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { Avatar } from "antd";
 import moment from "moment";
 import Slide from "../components/Slide";
 
 const Home = () => {
-  const [state] = useContext(UserContext);
-  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -21,14 +17,23 @@ const Home = () => {
 
   const getAllPosts = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get("/all-approved-posts");
       setPosts(data.posts);
+      setLoading(false);
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
-  return (
+  return loading ? (
+    <SyncOutlined
+      spin
+      style={{ width: "100vw", height: "55vh" }}
+      className="d-flex justify-content-center align-items-center text-primary p-5 display-1"
+    />
+  ) : (
     <main className="d-flex align-items-center flex-column">
       <div className="container category-container font-face-mulish d-flex justify-content-between align-items-center">
         <Link to="/category/art">Art</Link>
@@ -62,9 +67,7 @@ const Home = () => {
                       height: "400px"
                     }}
                     to={`/post/${post._id}`}></Link>
-                  <div
-                    className="card-footer d-flex flex-column justify-content-center p-5"
-                    style={{ height: "200px" }}>
+                  <div className="card-footer d-flex flex-column justify-content-center newest-posts-footer">
                     <div className="d-flex justify-content-between">
                       <h4 style={{ fontWeight: "bold" }}>
                         {post.title.split(" ").length < 6
@@ -76,9 +79,11 @@ const Home = () => {
                               })
                               .join(" ") + " ..."}
                       </h4>
-                      <h5 style={{ color: "blue" }}>{post.category.name}</h5>
+                      <h5 style={{ color: "blue" }} className="newest-posts-category">
+                        {post.category.name}
+                      </h5>
                     </div>
-                    <div className="mb-3" style={{ fontWeight: "500" }}>
+                    <div className="mb-3 newest-posts-author" style={{ fontWeight: "500" }}>
                       {post && post.postedBy && !post.postedBy.avatar ? (
                         <span className="pe-2">
                           <Avatar
@@ -156,7 +161,7 @@ const Home = () => {
                         backgroundPosition: "center"
                       }}
                       to={`/post/${post._id}`}></Link>
-                    <div className="card-footer d-flex flex-column justify-content-center p-5">
+                    <div className="card-footer d-flex flex-column justify-content-center game-posts-footer">
                       <div className="d-flex align-items-center justify-content-between">
                         <h4 style={{ fontWeight: "bold" }}>{post.title}</h4>
                       </div>
@@ -178,9 +183,12 @@ const Home = () => {
                             <Avatar src={post.postedBy.avatar.url} size={32} />
                           </span>
                         )}
-                        <span className="pe-2" style={{ color: "#40A9FF" }}>
+                        <Link
+                          className="pe-2"
+                          style={{ color: "#40A9FF" }}
+                          to={`/user/${post.postedBy._id}`}>
                           {post.postedBy.username}
-                        </span>
+                        </Link>
                         <span className="pe-2" style={{ color: "#00000080" }}>
                           {moment(post.updatedAt).fromNow()}
                         </span>
@@ -217,7 +225,7 @@ const Home = () => {
             More <ArrowRightOutlined style={{ fontSize: "80%" }} className="p-2" />
           </Link>
         </div>
-        <div className="container newest-posts-container mb-5">
+        <div className="container music-posts-container mb-5">
           {posts &&
             posts
               .filter(post => {
@@ -239,9 +247,7 @@ const Home = () => {
                         height: "400px"
                       }}
                       to={`/post/${post._id}`}></Link>
-                    <div
-                      className="card-footer d-flex flex-column justify-content-center p-5"
-                      style={{ height: "200px" }}>
+                    <div className="card-footer d-flex flex-column justify-content-center music-posts-footer">
                       <div className="d-flex justify-content-between">
                         <h4 style={{ fontWeight: "bold" }}>
                           {post.title.split(" ").length < 6
@@ -253,9 +259,8 @@ const Home = () => {
                                 })
                                 .join(" ") + " ..."}
                         </h4>
-                        <h5 style={{ color: "blue" }}>{post.category.name}</h5>
                       </div>
-                      <div className="mb-3" style={{ fontWeight: "500" }}>
+                      <div className="mb-3 music-posts-author" style={{ fontWeight: "500" }}>
                         {post && post.postedBy && !post.postedBy.avatar ? (
                           <span className="pe-2">
                             <Avatar
@@ -312,7 +317,7 @@ const Home = () => {
             More <ArrowRightOutlined style={{ fontSize: "80%" }} className="p-2" />
           </Link>
         </div>
-        <div className="container art-posts-container mb-5">
+        <div className="container tech-posts-container mb-5">
           {posts &&
             posts
               .filter(post => {
@@ -333,11 +338,11 @@ const Home = () => {
                         backgroundPosition: "center"
                       }}
                       to={`/post/${post._id}`}></Link>
-                    <div className="card-footer d-flex flex-column justify-content-center p-5">
+                    <div className="card-footer d-flex flex-column justify-content-center tech-posts-footer">
                       <div className="d-flex align-items-center justify-content-between">
                         <h4 style={{ fontWeight: "bold" }}>{post.title}</h4>
                       </div>
-                      <div className="art-post-author mb-3" style={{ fontWeight: "500" }}>
+                      <div className="tech-post-author mb-3" style={{ fontWeight: "500" }}>
                         {post && post.postedBy && !post.postedBy.avatar ? (
                           <span className="pe-2">
                             <Avatar
@@ -355,14 +360,17 @@ const Home = () => {
                             <Avatar src={post.postedBy.avatar.url} size={32} />
                           </span>
                         )}
-                        <span className="pe-2" style={{ color: "#40A9FF" }}>
+                        <Link
+                          className="pe-2"
+                          style={{ color: "#40A9FF" }}
+                          to={`/user/${post.postedBy._id}`}>
                           {post.postedBy.username}
-                        </span>
+                        </Link>
                         <span className="pe-2" style={{ color: "#00000080" }}>
                           {moment(post.updatedAt).fromNow()}
                         </span>
                       </div>
-                      <div className="art-posts-description">
+                      <div className="tech-posts-description">
                         <p
                           style={{
                             fontWeight: "400",

@@ -1,3 +1,17 @@
 .search-result-container {
-  min-height: 50vh;
+  position: relative;
+  top: 50px;
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container.search-by-title-container {
+  width: 45vw;
+}
+
+@media screen and (max-width: 1000px) {
+  .container.search-by-title-container {
+    width: 75vw;
+  }
 }

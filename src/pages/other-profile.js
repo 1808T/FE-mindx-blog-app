@@ -30,12 +30,13 @@ const OtherProfile = () => {
   };
 
   return (
-    <div className="container other-profile-container d-flex flex-column justify-content-center align-items-center">
+    <div className="container other-profile-container d-flex flex-column justify-content-center align-items-center font-face-mulish text-black">
       <h1>{user.username}</h1>
       <div>
         {user && !user.avatar ? (
           <Avatar
             size={150}
+            className="mb-3"
             style={{
               color: "#f56a00",
               backgroundColor: "#fde3cf",
@@ -44,20 +45,20 @@ const OtherProfile = () => {
             {user && user.username[0].toUpperCase()}
           </Avatar>
         ) : (
-          <Avatar src={user.avatar.url} size={150} />
+          <Avatar src={user.avatar.url} size={150} className="mb-3" />
         )}
       </div>
       <div>
         {user && !user.about ? (
           <>No info</>
         ) : (
-          <>
-            <div>First name: {user.about.firstName}</div>
-            <div>Last name: {user.about.lastName}</div>
-            <div>Date of birth: {user.about.dob}</div>
-            <div>Gender: {user.about.gender}</div>
-            <div>Phone: {user.about.phone}</div>
-          </>
+          <div className="mb-3">
+            <h6>First name: {user.about.firstName}</h6>
+            <h6>Last name: {user.about.lastName}</h6>
+            <h6>Date of birth: {user.about.dob}</h6>
+            <h6>Gender: {user.about.gender}</h6>
+            <h6>Phone: {user.about.phone}</h6>
+          </div>
         )}
       </div>
       <h6>Joined on {moment(user.createdAt).format("ll")}</h6>

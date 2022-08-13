@@ -119,7 +119,6 @@ const CreatePost = () => {
     try {
       setUploading(true);
       const { data } = await axios.put("/image", formData);
-      console.log(data);
       setImage({
         url: data.url,
         public_id: data.public_id
