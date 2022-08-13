@@ -161,7 +161,8 @@ const Profile = () => {
   return !ok ? (
     <SyncOutlined
       spin
-      className="d-flex justify-content-center align-items-center display-2 text-primary p-5"
+      style={{ width: "100vw", height: "55vh" }}
+      className="d-flex justify-content-center align-items-center text-primary p-5 display-1"
     />
   ) : (
     <>

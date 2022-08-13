@@ -55,7 +55,6 @@ const CreatePost = () => {
         url: "",
         public_id: ""
       });
-      setCategory("");
       setLoading(false);
     } catch (err) {
       toast.error(err.response.data.message, { theme: "colored" });
